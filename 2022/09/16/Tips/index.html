@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Tips | Hexo-Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tips">
+<meta property="og:url" content="https://xiatian57.github.io/2022/09/16/Tips/index.html">
+<meta property="og:site_name" content="Hexo-Li">
+<meta property="og:description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-16T11:16:32.000Z">
+<meta property="article:modified_time" content="2022-10-07T07:33:43.584Z">
+<meta property="article:author" content="Li Ping">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo-Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo-Li</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://XiaTian57.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/16/Tips/" class="article-date">
+  <time datetime="2022-09-16T11:16:32.000Z" itemprop="datePublished">2022-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Tips
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="undefined和null类型："><a href="#undefined和null类型：" class="headerlink" title="undefined和null类型："></a>undefined和null类型：</h2><h3 id="undefined："><a href="#undefined：" class="headerlink" title="undefined："></a>undefined：</h3><p>当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。</p>
+<h3 id="null"><a href="#null" class="headerlink" title="null:"></a>null:</h3><p>null逻辑上表示空对象指针，为typeof传入null、空数组字面量、空对象字面量时返回object；在声明将来要保存对象值的变量时建议使用null进行初始化，这样只需要检查变量类型是不是null就能知道变量有没有被重新赋予一个对象的引用。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>null是空对象指针，undefined只是变量未初始化。</p>
+<hr>
+<h2 id="浮点数："><a href="#浮点数：" class="headerlink" title="浮点数："></a>浮点数：</h2><h3 id="科学计数法："><a href="#科学计数法：" class="headerlink" title="科学计数法："></a>科学计数法：</h3><p>整数值E/e次幂==&gt;0.3e4–&gt;3000</p>
+<h3 id="精确数位："><a href="#精确数位：" class="headerlink" title="精确数位："></a>精确数位：</h3><p>计算机中的浮点数精确到小数点后17位，所以算术运算小数点后的值并没有整数精确。例如：0.1 + 0.2  !==0.3；因此不建议测试某个特定浮点值。</p>
+<hr>
+<h2 id="ECMAscript数值范围："><a href="#ECMAscript数值范围：" class="headerlink" title="ECMAscript数值范围："></a>ECMAscript数值范围：</h2><p>JavaScript能表示的数值范围在 [min_value，max_value] 中，超过最小值时转为-infinity；超过最大值时转为Infiniti；表示负/正无穷大，他们都不能继续参与运算。</p>
+<p>检测数值是否在可表示范围内时，可以使用isFinite(数值)，返回值是布尔值，在可表示范围内返回true，否则返回false。</p>
+<hr>
+<h2 id="JavaScript执行机制"><a href="#JavaScript执行机制" class="headerlink" title="JavaScript执行机制"></a>JavaScript执行机制</h2><h3 id="扩展知识："><a href="#扩展知识：" class="headerlink" title="扩展知识："></a>扩展知识：</h3><p>0、JavaScript是单线程程序处理机制。HTML5提出允许JavaScript创建多个子线程，但其完全被主线程操控且不能操作DOM，所以其本质还是单线程。</p>
+<p>1、进程：一个具有独立功能的程序在一个数据集上的一次动态执行的过程，进程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。</p>
+<blockquote>
+<ul>
+<li><strong>动态性：</strong>进程是程序的一次执行过程，是临时的，有生命期的，是动态产生，动态消亡的；</li>
+<li><strong>并发性：</strong>任何进程都可以同其他进程一起并发执行；</li>
+<li><strong>独立性：</strong>进程是系统进行资源分配和调度的一个独立单位；</li>
+<li><strong>结构性：</strong>进程由程序、数据和进程控制块三部分组成。</li>
+</ul>
+</blockquote>
+<p>2、线程：线程是程序执行中一个单一的顺序控制流程。</p>
+<p>3、区别：</p>
+<blockquote>
+<ul>
+<li>一个进程可以有一个或多个线程，各个线程之间共享程序的内存空间(即所在进程的内存空间)。一个标准的线程由线程ID、当前指令指针(PC)、寄存器和堆栈组成。而进程由内存空间(代码、数据、进程空间、打开的文件)和一个或多个线程组成。</li>
+</ul>
+<ul>
+<li>线程是程序执行的最小单位，而进程是操作系统分配资源的最小单位；</li>
+</ul>
+<ul>
+<li>一个进程由一个或多个线程组成，线程是一个进程中代码的不同执行路线；</li>
+<li>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段、数据集、堆等)及一些进程级的资源(如打开文件和信号)，进程与进程之间互不可见；</li>
+<li>调度和切换：线程上下文切换比进程上下文切换要快得多。</li>
+</ul>
+</blockquote>
+<p>4、浏览器的一些主要进程：</p>
+<ul>
+<li>浏览器进程：控制界面显示，用户界面交互等；</li>
+<li>第三方插件进程：管理插件使用；</li>
+<li>GPU进程：3D绘制硬件加速；</li>
+<li>渲染进程：页面解析、代码执行、页面渲染；</li>
+<li>渲染进程下的线程：<ul>
+<li>GUI渲染线程：</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="禁用效果"><a href="#禁用效果" class="headerlink" title="禁用效果"></a>禁用效果</h2><p>1、表单元素禁用：disabled = true</p>
+<p>2、非表单元素：pointer-events = none</p>
+<blockquote>
+<p>非表单元素设置css属性pointer-events，让所有鼠标操作失效，该属性默认为auto。</p>
+<p>使用场景：按钮样式不好修改，开发中一般使用a链接代替按钮。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;#&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;code&quot;</span>&gt;发送验证码&lt;/a&gt; </span><br><span class="line">-----------</span><br><span class="line"><span class="keyword">const</span> link = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.xtx-form-item a.code&#x27;</span>)</span><br><span class="line">    link.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 点击之后让按钮禁用</span></span><br><span class="line">      link.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">5</span></span><br><span class="line">      link.<span class="property">innerHTML</span> = <span class="string">`5秒后重新发送`</span></span><br><span class="line">      <span class="keyword">const</span> timerID = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        i--</span><br><span class="line">        link.<span class="property">innerHTML</span> = <span class="string">`<span class="subst">$&#123;i&#125;</span>秒后重新发送`</span></span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">          link.<span class="property">innerHTML</span> = <span class="string">`获取验证码`</span></span><br><span class="line">          <span class="built_in">clearInterval</span>(timerID)</span><br><span class="line">          <span class="comment">// 重新启用按钮</span></span><br><span class="line">          link.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;auto&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xiatian57.github.io/2022/09/16/Tips/" data-id="cl917ydx80002suwn4jo80evn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Javascript基础语法
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/05/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/05/%E5%8E%9F%E7%94%9F%E8%BD%AE%E6%92%AD%E5%9B%BE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/27/ES6/">ES6</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/27/WebAPI/">WebAPI</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">Javascript基础语法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Li Ping<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
