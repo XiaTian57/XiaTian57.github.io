@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/15/Ajax-Node/" data-id="cl9grdibs0000u8wnehxpg3r0" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/15/Ajax-Node/" data-id="cl9grqo1i0000x1wnd4pogml7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +168,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
+      <a class="article-title" href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">搭建hexo博客并部署到GitHub</a>
     </h1>
   
 
@@ -180,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/" data-id="cl9grdibw0005u8wn4hb83zsy" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/" data-id="cl9grqo1m0005x1wnf42b51k0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/05/hello-world/" data-id="cl9grdibu0001u8wnf6w9b3wv" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/05/hello-world/" data-id="cl9grqo1k0001x1wn9rjw3dsv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +381,7 @@
 <p>当发生链式调用时，必须逐级等待处理，不灵活。所以引入await关键字用于接收处理结果，后续处理可以灵活写在页面的任何地方。</p>
 <p>await 关键字必须包含在async函数内，async函数内可以没有await关键字。</p>
 <p>语法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="comment">// 变量A接收处理结果，但接收到的是一个promise实例不能直接使用，需要先用await修饰转换为 普通对象</span></span><br><span class="line">  <span class="comment">// 只能接受resove返回的结果</span></span><br><span class="line">  <span class="keyword">let</span> A = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">    <span class="comment">// 处理耗时任务</span></span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">---------------------例子</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123;<span class="attr">data</span>:res&#125;=<span class="keyword">await</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>:<span class="string">&#x27;地址&#x27;</span>&#125;) <span class="comment">// axios 原地返回一个promise实例</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="comment">// 变量A接收处理结果，但接收到的是一个promise实例不能直接使用，需要先用await修饰转换为 普通对象</span></span><br><span class="line">  <span class="comment">// 只能接受resove返回的结果</span></span><br><span class="line">  <span class="keyword">let</span> A = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">    <span class="comment">// 处理耗时任务</span></span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="title function_">reject</span>(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">---------------------例子</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123;<span class="attr">data</span>:res&#125;=<span class="keyword">await</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>:<span class="string">&#x27;地址&#x27;</span>&#125;) <span class="comment">// axios 原地返回一个promise实例</span></span><br><span class="line">&#125;</span><br><span class="line">---------------------</span><br><span class="line"><span class="comment">// await只能接受resolve 成功的回调，失败的回调需要使用try catch 捕获</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">Fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> A = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">    <span class="comment">// 处理耗时任务</span></span><br><span class="line">    <span class="comment">// 返回结果</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="title function_">reject</span>(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -392,9 +392,7 @@
 <p>例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="string">&#x27;22,33&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getMax</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(arr)) &#123;</span><br><span class="line">    <span class="comment">// 当程序执行可能出现不符合预期情况时手动抛出异常。</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="title class_">Error</span>(<span class="string">&#x27;不是数组&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 情况一、捕获可能发生的错误</span></span><br><span class="line"><span class="comment">/* try &#123;</span></span><br><span class="line"><span class="comment">getMax(arr)</span></span><br><span class="line"><span class="comment">&#125; catch (err) &#123;</span></span><br><span class="line"><span class="comment">console.log(err)</span></span><br><span class="line"><span class="comment">&#125; */</span></span><br><span class="line"><span class="comment">// 情况二、不捕获错误</span></span><br><span class="line"><span class="title function_">getMax</span>(arr)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;正常&#x27;</span>) <span class="comment">// 情况二时，程序阻塞不能打印‘正常’；情况一时可以打印。</span></span><br></pre></td></tr></table></figure>
 
-
-
-<h4 id="2、"><a href="#2、" class="headerlink" title="2、"></a>2、</h4><h3 id="深拷贝-浅拷贝"><a href="#深拷贝-浅拷贝" class="headerlink" title="深拷贝/浅拷贝"></a>深拷贝/浅拷贝</h3><p>主要针对引用数据类型，因为引用类型变量中存放的是引用地址，真正的数据需要根据地址二次寻址。</p>
+<h3 id="深拷贝-浅拷贝"><a href="#深拷贝-浅拷贝" class="headerlink" title="深拷贝/浅拷贝"></a>深拷贝/浅拷贝</h3><p>主要针对引用数据类型，因为引用类型变量中存放的是引用地址，真正的数据需要根据地址二次寻址。</p>
 <p>1、浅拷贝：只复制栈中的数据（引用地址），不能得到两份地址。</p>
 <p>2、深拷贝：复制堆中的数据，最终得到两份。</p>
 <p>原理：不能简单赋值，而是读取地址中的每个数据追加到新地址。</p>
@@ -446,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/ES6+/" data-id="cl9grdibv0002u8wn58haa0kw" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/ES6+/" data-id="cl9grqo1l0002x1wnbcbucscn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -837,7 +835,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/WebAPI/" data-id="cl9grdibw0004u8wn9h3g9hmz" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/WebAPI/" data-id="cl9grqo1m0004x1wn8otj8iic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1108,7 +1106,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl9grdibw0003u8wn7hnpd20z" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl9grqo1l0003x1wng1e6dgkr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1242,7 +1240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9grdibx0006u8wn75ac7v49" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9grqo1m0006x1wn8i4f6qgh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1287,7 +1285,7 @@
           </li>
         
           <li>
-            <a href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
+            <a href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">搭建hexo博客并部署到GitHub</a>
           </li>
         
           <li>
