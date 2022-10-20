@@ -10,12 +10,12 @@
   <meta name="description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tips">
-<meta property="og:url" content="https://xiatian57.github.io/2022/09/16/Tips/index.html">
+<meta property="og:url" content="https://xiatian57.github.io/2022/09/16/tips/Tips/index.html">
 <meta property="og:site_name" content="Hexo-Li">
 <meta property="og:description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-16T11:16:32.000Z">
-<meta property="article:modified_time" content="2022-10-09T10:57:01.310Z">
+<meta property="article:modified_time" content="2022-10-17T10:26:25.033Z">
 <meta property="article:author" content="Li Ping">
 <meta name="twitter:card" content="summary">
   
@@ -66,9 +66,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Tips" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-tips/Tips" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/09/16/Tips/" class="article-date">
+    <a href="/2022/09/16/tips/Tips/" class="article-date">
   <time datetime="2022-09-16T11:16:32.000Z" itemprop="datePublished">2022-09-16</time>
 </a>
     
@@ -131,10 +131,26 @@
 <li>GPU进程：3D绘制硬件加速；</li>
 <li>渲染进程：页面解析、代码执行、页面渲染；</li>
 <li>渲染进程下的线程：<ul>
-<li>GUI渲染线程：</li>
+<li>GUI渲染线程：解析html，css构建DOM树，布局等；与JS解析引擎线程互斥</li>
+<li>JS引擎：负责处理JS脚本，浏览器同时只能有一个JS引擎线程在运行JS。因为与GUI互斥，JS可能会阻塞页面渲染。</li>
+<li>定时器线程：setInterval，set Timeout</li>
+<li>事件触发线程：当事件触发时将事件推到处理队列等待主线程执行。</li>
+<li>异步请求线程：当XMLHttpRequest 链接后浏览器开启线程，检测请求状态变更，将回调函数推入任务队列。</li>
 </ul>
 </li>
 </ul>
+<h3 id="执行机制："><a href="#执行机制：" class="headerlink" title="执行机制："></a>执行机制：</h3><p>1、同步任务与异步任务进入不同的执行场所：同步–主线程，异步– event table，并注册函数。（每一个异步任务都会注册事件函数等待触发）</p>
+<p>2、触发异步任务的注册事件时将任务推入任务队列；</p>
+<p>3、等待主线程执行完毕，读取任务队列中的函数进入主线程执行。</p>
+<p>4、event loop：主线程执行完毕（执行栈为空）并查找任务队列的过程重复执行。</p>
+<p>5、JS引擎的<code>monitoring process</code>进程会不断检测执行栈是否为空。</p>
+<h4 id="宏任务-微任务"><a href="#宏任务-微任务" class="headerlink" title="宏任务/微任务"></a>宏任务/微任务</h4><p>异步任务又被划分为宏任务和微任务</p>
+<p>宏任务：由宿主环境发起的任务，包括全局代码，setInterval,setTimeout…</p>
+<p>微任务：由js自身发起，包括promise.then(),process.nextTick()…</p>
+<p>执行：</p>
+<p>0、执行同步代码，执行完毕后查找任务队列，进入微任务队列查看有没有可以执行的微任务，推入主线程执行；</p>
+<p>1、微任务执行完毕后去宏任务队列查找可执行的宏任务，推入主线程执行；</p>
+<p>2、主线程为空进入任务队列继续查找，循环执行代码。</p>
 <hr>
 <h2 id="禁用效果"><a href="#禁用效果" class="headerlink" title="禁用效果"></a>禁用效果</h2><p>1、表单元素禁用：disabled = true</p>
 <p>2、非表单元素：pointer-events = none</p>
@@ -144,11 +160,37 @@
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;#&quot;</span> <span class="keyword">class</span>=<span class="string">&quot;code&quot;</span>&gt;发送验证码&lt;/a&gt; </span><br><span class="line">-----------</span><br><span class="line"><span class="keyword">const</span> link = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.xtx-form-item a.code&#x27;</span>)</span><br><span class="line">    link.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 点击之后让按钮禁用</span></span><br><span class="line">      link.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;none&#x27;</span></span><br><span class="line">      <span class="keyword">let</span> i = <span class="number">5</span></span><br><span class="line">      link.<span class="property">innerHTML</span> = <span class="string">`5秒后重新发送`</span></span><br><span class="line">      <span class="keyword">const</span> timerID = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        i--</span><br><span class="line">        link.<span class="property">innerHTML</span> = <span class="string">`<span class="subst">$&#123;i&#125;</span>秒后重新发送`</span></span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">          link.<span class="property">innerHTML</span> = <span class="string">`获取验证码`</span></span><br><span class="line">          <span class="built_in">clearInterval</span>(timerID)</span><br><span class="line">          <span class="comment">// 重新启用按钮</span></span><br><span class="line">          link.<span class="property">style</span>.<span class="property">pointerEvents</span> = <span class="string">&#x27;auto&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 
+<h2 id="获取表单数据"><a href="#获取表单数据" class="headerlink" title="获取表单数据"></a>获取表单数据</h2><p>当表单项特别多时，可以使用第三方库或新版本JS内置对象FormData一次性获取所有表单数据并存储为对象返回。</p>
+<h3 id="一、form-serialize"><a href="#一、form-serialize" class="headerlink" title="一、form-serialize:"></a>一、<code>form-serialize</code>:</h3><p>1、下载serialize的JS库文件并引入；</p>
+<p>2、语法：serialize(form表单对象，{hash:布尔值})</p>
+<p>当布尔值为true，将表单数据收集组织为对象；</p>
+<p>当布尔值为false，将表单数据收集组织为get请求后拼接的参数形式的字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="title function_">serialize</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;form&#x27;</span>), &#123; <span class="attr">hash</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data) <span class="comment">//&#123;表单name：表单值，表单name：表单值&#125;</span></span><br><span class="line"><span class="comment">// 所以表单name最好与请求参数名一致。方便</span></span><br></pre></td></tr></table></figure>
+
+<p>属于第三方库，不能用于上传文件。</p>
+<h3 id="二、FormData"><a href="#二、FormData" class="headerlink" title="二、FormData:"></a>二、<code>FormData</code>:</h3><p>新版本JS内置对象FormData，也是一个构造函数。</p>
+<p>1、实例化对象：</p>
+<p>new FormData()  //html有Form表单元素但没有Form标签。</p>
+<p>new FormData(form标签对象)  // html有form标签</p>
+<p>2、常用方法：参考MDN</p>
+<p>.get(name) 返回给定name属性的值</p>
+<p>.entries() 返回包含所有键值对的对象,也看不到具体键值对</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="keyword">new</span> <span class="title class_">FormData</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;form&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data)  <span class="comment">// 只能得到一个对象看不到键值对</span></span><br><span class="line">consloe.<span class="title function_">log</span>(data.<span class="title function_">get</span>(bookname)) </span><br></pre></td></tr></table></figure>
+
+<p><code>注意</code>：不能一开始就获取，要表单项通过验证以后在触发提交事件时才获取，这时候的参数值才是需要提交给接口的参数。一开始就获取的话值为空，接口报错422，参数错误。</p>
+<h2 id="表单–文件上传："><a href="#表单–文件上传：" class="headerlink" title="表单–文件上传："></a>表单–文件上传：</h2><p>1、accept 属性，过滤选择的文件后缀，当点击选择文件时只出现accept中过滤的后缀文件</p>
+<p>2、change事件，当表单上传的文件发生变化时触发change事件</p>
+<p>3、e.target.files 获取上传的文件对象，返回伪数组，通过下表获取具体文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、过滤</span></span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> accept=<span class="string">&quot;.jpg,.png&quot;</span>&gt;</span><br><span class="line"><span class="comment">// 2、绑定事件</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;input&#x27;</span>).<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="comment">// 3、获取文件：伪数组</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>)</span><br><span class="line">  <span class="comment">// 3、获取具体某个文件</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>文件上传按钮设置CSS样式时，文字图片也随之改变，即无法单独设置样式。所以开发中一般将其隐藏，使用别的按钮代替触发file的默认点击事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、隐藏input type=&quot;file&quot;</span></span><br><span class="line"><span class="comment">// 2、设置新按钮</span></span><br><span class="line"><span class="comment">// 3、新按钮点击触发原始input的点击事件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/Tips/" data-id="cl918t6fl00030rwn0opgflhg" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9grdibx0006u8wn75ac7v49" class="article-share-link">Share</a>
       
       
     </footer>
@@ -157,7 +199,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -201,7 +243,11 @@
       <ul>
         
           <li>
-            <a href="/2022/10/09/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
+            <a href="/2022/10/15/Ajax-Node/">Ajax-Node-服务端相关</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
           </li>
         
           <li>
@@ -209,15 +255,11 @@
           </li>
         
           <li>
-            <a href="/2022/09/27/ES6/">ES6</a>
+            <a href="/2022/09/27/javascript/ES6+/">ES6+</a>
           </li>
         
           <li>
-            <a href="/2022/09/27/WebAPI/">WebAPI</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">Javascript基础语法</a>
+            <a href="/2022/09/27/javascript/WebAPI/">WebAPI</a>
           </li>
         
       </ul>

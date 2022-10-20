@@ -10,12 +10,12 @@
   <meta name="description" content="JS引入：script标签包裹JS代码，可以在script标签中写内部JS代码，也可以使用标签的src属性引入外部JS。 注意：一个script标签不能同时引入外部脚本又包含内部JS代码。 123&lt;script src&#x3D;&quot;.&#x2F;index.js&quot;&gt; alert(&amp;#x27;有了src属性引入外部脚本，标签内的代码就不会再执行了！&amp;#x27;)&lt;&#x2F;script&amp;g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript基础语法">
-<meta property="og:url" content="https://xiatian57.github.io/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:url" content="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo-Li">
 <meta property="og:description" content="JS引入：script标签包裹JS代码，可以在script标签中写内部JS代码，也可以使用标签的src属性引入外部JS。 注意：一个script标签不能同时引入外部脚本又包含内部JS代码。 123&lt;script src&#x3D;&quot;.&#x2F;index.js&quot;&gt; alert(&amp;#x27;有了src属性引入外部脚本，标签内的代码就不会再执行了！&amp;#x27;)&lt;&#x2F;script&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-16T11:16:32.000Z">
-<meta property="article:modified_time" content="2022-10-07T06:46:49.643Z">
+<meta property="article:modified_time" content="2022-10-11T08:42:28.483Z">
 <meta property="article:author" content="Li Ping">
 <meta name="twitter:card" content="summary">
   
@@ -66,9 +66,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JavaScript-基础语法" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-javascript/JavaScript-基础语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="article-date">
+    <a href="/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="article-date">
   <time datetime="2022-09-16T11:16:32.000Z" itemprop="datePublished">2022-09-16</time>
 </a>
     
@@ -102,7 +102,12 @@
 <p>特性：</p>
 <p>1、当浏览器不支持或支持模式被关闭时触发执行noscript标签中的代码。（满足条件之一才会渲染noscript）</p>
 <p>2、noscript标签中可以包含除了script标签之外的任何能出现在body中的元素。</p>
-<h3 id="变量："><a href="#变量：" class="headerlink" title="变量："></a>变量：</h3><p>变量不声明而有赋值，自动提升为全局变量。</p>
+<h3 id="变量："><a href="#变量：" class="headerlink" title="变量："></a>变量：</h3><p>本质：内存空间；</p>
+<p>变量中存放两种内容：值和地址引用；</p>
+<p>变量不声明而有赋值，自动提升为全局变量。</p>
+<h4 id="作用域："><a href="#作用域：" class="headerlink" title="作用域："></a>作用域：</h4><p>1、函数级别的局部作用域；</p>
+<p>2、全局作用域：同一网页的所有脚本和函数都能访问。（同一网页下的所有不同的script脚本或别的脚本都能用，所以需要防止全局变量污染。）</p>
+<p><code>扩展</code>：let 声明的全局作用域下的变量不挂载到window对象上，var声明的全局作用域下的变量挂载为window的属性。</p>
 <h4 id="自增自减："><a href="#自增自减：" class="headerlink" title="自增自减："></a>自增自减：</h4><p>++a：先给a自增存储，后参与运算。</p>
 <p>a++:先让a参与运算，后再自增并存储。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="comment">// console.log(a++) // 1</span></span><br><span class="line"><span class="comment">// console.log(++a) // 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b=a++ + ++a</span><br><span class="line"><span class="comment">// console.log(b) // 4</span></span><br><span class="line"><span class="comment">// console.log(a) // 3</span></span><br></pre></td></tr></table></figure>
@@ -163,17 +168,30 @@
 <p>string  number  boolean  undefined  null</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num   <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">let</span> num=[]  <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
 
+<h5 id="number"><a href="#number" class="headerlink" title="number"></a>number</h5><p>实例方法：toFixed(n),保留n位小数位；将数值转换为字符串后四舍六入保留浮点数。</p>
 <h5 id="string："><a href="#string：" class="headerlink" title="string："></a>string：</h5><p>字符串本身具有下标和长度；</p>
 <p>1、字符串检索：</p>
 <p>  1-1：charAt(索引)：检索索引返回字符；</p>
 <p>  1-2：indexOf(字符)：输入字符返回字符的索引，未查找到字符返回  -1 ；</p>
+<p>  1-3: str.match(正则)：字符串匹配正则，返回满足正则的字符。</p>
+<p>  1-4: str.includes(某字符串，开始位置)；从开始位置开始检索str中是否有某字符串，返回布尔值，不传入开始位置默认位0.</p>
 <p>2、字符串截取：</p>
 <p>  2-1：slic(起始位置，终止位置)：截取之间的字符串，但不包含终止位置的字符，不传入终止位置的参数时截取到字符串结束；可以反向截取，反向时使用负数，从 -1 开始查找。</p>
 <p>  2-2：substring(起始，终止)：与slice类似，但不能反向截取。</p>
 <p>  2-3：split(参数)：将字符串以参数为分割点进行分割并将分割片段存入数组。</p>
 <p>  2-4：str.trim(): 字符串调用该方法去点其头部和尾部的空格（中间保留）。</p>
-<p>  2-5：str.replace(查询正则或字符，替换规则/字符): 字符串调用该方法查找符合条件的字符并使用替换规则或字符进行替换；替换规则可能是个函数。<code>注意：</code> 替换后返回新字符串，不改变原字符串；只替换一次，全部替换需要在规则后加上修饰符g全局匹配。</p>
+<p>  2-5：str.replace(查询正则或字符，替换规则/字符): 字符串调用该方法查找符合条件的字符并使用替换规则或字符进行替换；替换规则可能是个函数。</p>
+<p><code>注意：</code> 替换后返回新字符串，不改变原字符串；只替换一次，全部替换需要在规则后加上修饰符g全局匹配。</p>
+<p>  2-6: str.startsWith(某段字符串)，判断字符串是否以某段字符开头，返回布尔值.</p>
+<p> 相关：endsWith()</p>
+<p>  2-7: str.padStart(长度，填充字符)，判断字符串是否满足长度，不满足则以填充字符在开头填充。</p>
+<p> 相关：padEnd()</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 场景：补0操作</span></span><br><span class="line"><span class="keyword">let</span> str = <span class="number">0</span></span><br><span class="line"><span class="comment">// 因为该方法属于string的原型方法，str=0是数值类型不能使用，需要转换</span></span><br><span class="line">str = <span class="title class_">String</span>(str).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str) <span class="comment">// ‘*0’</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="引用类型："><a href="#引用类型：" class="headerlink" title="引用类型："></a>引用类型：</h4><p>栈中存放变量名和指向变量值的地址映射，堆中存放变量值。变量互相赋值时，执行将地址引用复制给另一个变量并存入其栈中，让它也能指向堆中的数据（此时只有一个变量值，存放在堆中，修改某个变量的值导致堆中的数据发生改变，其余指向堆的变量也会被影响）。</p>
+<p>栈区效率比堆区高，因为堆区的数据使用时需要二次寻址，栈区直接使用。</p>
 <h5 id="数组："><a href="#数组：" class="headerlink" title="数组："></a>数组：</h5><p>注意：跨域已有下标赋值或查询时，数组自动增加长度，未赋值的元素自动赋值undefined。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"> arr[<span class="number">10</span>] = <span class="number">10</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">8</span>]) <span class="comment">// undefined</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">10</span>]) <span class="comment">// 10</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">50</span>]) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
@@ -205,11 +223,17 @@
 <p>2、reverse（）：数组反转，返回反转后的新数组；</p>
 <p>3、sort（）：数组排序；</p>
 <p>4、every（）：判断数组中的每一个元素是否满足条件，返回布尔值；全满足才返回true；</p>
-<p>5、filter（）：筛选数组中满足条件的元素并将其存入新数组，返回值是新数组；</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">33</span>,<span class="number">5</span>,<span class="number">33</span>,<span class="number">44</span>]</span><br><span class="line"><span class="comment">// 选择小于10的元素存入新数组</span></span><br><span class="line"><span class="keyword">let</span> newArr=arr.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span>=&gt;</span>item&lt;<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>5、some（）：查找满足条件的数组元素，只执行一次，只要找到第一个满足条件的元素就返回true且不再进行遍历查找。</p>
+<p>6、filter（）：筛选数组中满足条件的元素并将其存入新数组，返回值是新数组；</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">33</span>,<span class="number">5</span>,<span class="number">33</span>,<span class="number">44</span>]</span><br><span class="line"><span class="comment">// 选择小于10的元素存入新数组</span></span><br><span class="line"><span class="keyword">let</span> newArr=arr.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span>=&gt;</span>item&lt;<span class="number">10</span>)</span><br><span class="line"><span class="comment">// 完整语法：</span></span><br><span class="line"><span class="keyword">let</span> narr = arr.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 语法规范：return 条件</span></span><br><span class="line">  <span class="keyword">return</span> item&gt;<span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>6、some（）：查找满足条件的数组元素，只执行一次，只要找到第一个满足条件的元素就返回true且不再进行遍历查找。</p>
-<p>7、jion(分割字符)：数组转字符串，并可以自己选定转字符串的分隔符，如果不传入参数默认以逗号分隔。</p>
+<p>7、find():查找满足条件的数组元素并返回，如果没有找到返回undifined.</p>
+<p>8、jion(分割字符)：数组转字符串，并可以自己选定转字符串的分隔符，如果不传入参数默认以逗号分隔。</p>
+<p>9、reduce(function(计算参数，item){},初始值)，每次都执行reduce函数并将执行结果返回给计算参数，下一次循环将计算参数传给函数参与计算，循环结束返回最终结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">      <span class="comment">// 求偶数的个数</span></span><br><span class="line">      <span class="keyword">let</span> count = arr.<span class="title function_">reduce</span>(<span class="function">(<span class="params">count, item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> item % <span class="number">2</span> === <span class="number">0</span> ? ++count : count</span><br><span class="line">      &#125;, <span class="number">0</span>)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(count) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h5 id="对象："><a href="#对象：" class="headerlink" title="对象："></a>对象：</h5><p>一组无序数据集合</p>
 <h6 id="声明："><a href="#声明：" class="headerlink" title="声明："></a>声明：</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj=&#123;&#125; <span class="comment">// 声明空对象</span></span><br><span class="line"><span class="keyword">let</span> obj=&#123;<span class="attr">name</span>:<span class="string">&#x27;zs&#x27;</span>,<span class="attr">age</span>:<span class="number">18</span>&#125; <span class="comment">//声明并初始化</span></span><br><span class="line"><span class="keyword">let</span> obj=&#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;zs&#x27;</span>,<span class="attr">age</span>:<span class="number">18</span>&#125; <span class="comment">//属性名有没有被引号包裹没有区别☆☆☆</span></span><br><span class="line"><span class="keyword">let</span> obj=<span class="keyword">new</span> <span class="title class_">Object</span>(&#123;&#125;) <span class="comment">// 实例化声明</span></span><br><span class="line">-----------------</span><br><span class="line"><span class="keyword">let</span> obj=&#123;&#125; <span class="comment">// 先声明后赋值</span></span><br><span class="line">obj[<span class="string">&#x27;name&#x27;</span>]=<span class="string">&#x27;zs&#x27;</span> <span class="comment">// 赋值方法[]  obj&#123;&#x27;name&#x27;:&#x27;zs&#x27;&#125;</span></span><br><span class="line">obj.<span class="property">name3</span>=<span class="string">&#x27;hahaha&#x27;</span> <span class="comment">// 赋值方法 .  点操作符  obj&#123;name3:&#x27;hahaha&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -230,6 +254,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="string">&#x27;zs&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>:<span class="number">19</span>,</span><br><span class="line">    <span class="attr">sex</span>:<span class="string">&#x27;nan&#x27;</span>,</span><br><span class="line">    <span class="attr">sayHai</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hai&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// for in</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">// key 代表对象的每一项属性名</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key) <span class="comment">// name,age,sex,sayHai</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(obj[key]) <span class="comment">//&#x27;zs&#x27;,19,&#x27;nan&#x27;,function</span></span><br><span class="line">    <span class="comment">// 不能使用obj.key来查询属性值，因为这里的key是变量，需要使用中括号语法</span></span><br><span class="line">    <span class="comment">// 中括号语法不带引号，当变量解析，找到变量对应的值，以值来作为属性名查找</span></span><br><span class="line">    <span class="comment">// 中括号语法带引号，则作为属性名直接查找。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h6 id="检查对象是否拥有某个属性："><a href="#检查对象是否拥有某个属性：" class="headerlink" title="检查对象是否拥有某个属性："></a>检查对象是否拥有某个属性：</h6><p>1、对象实例.hasOwnProperty(‘属性名’)；返回值是布尔值，如果有返回true，没有返回false；</p>
+<p>实例方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意：hasOwnProperty（）方法中的属性名要用引号包裹，否则解析为变量。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name&#x27;</span>)) <span class="comment">// ture</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">hasOwnProperty</span>(name)) <span class="comment">// 查找变量name的值当作属性名</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name12&#x27;</span>)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>2、‘属性名’  in 实例；返回值也是布尔值；</p>
@@ -240,7 +265,8 @@
 
 
 
-<h6 id="对象的内置方法："><a href="#对象的内置方法：" class="headerlink" title="对象的内置方法："></a>对象的内置方法：</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)  <span class="comment">//查看所有的key，返回组成的数组</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">values</span>(obj)  <span class="comment">//查看所有的value，返回数组</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">entries</span>(obj)  <span class="comment">//查看所有的key和value ，entries 条目，返回二维数组</span></span><br></pre></td></tr></table></figure>
+<h6 id="对象的内置方法："><a href="#对象的内置方法：" class="headerlink" title="对象的内置方法："></a>对象的内置方法：</h6><p>原型方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)  <span class="comment">//查看所有的key，返回组成的数组</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">values</span>(obj)  <span class="comment">//查看所有的value，返回数组</span></span><br><span class="line"> </span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">entries</span>(obj)  <span class="comment">//查看所有的key和value ，entries 条目，返回二维数组</span></span><br></pre></td></tr></table></figure>
 
 <h5 id="函数："><a href="#函数：" class="headerlink" title="函数："></a>函数：</h5><p>函数定义：function  函数名（形参）{  }</p>
 <p>函数调用：函数名（实参）</p>
@@ -301,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl918t6fj00010rwnagg36fga" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl9grdibw0003u8wn7hnpd20z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -310,7 +336,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/09/27/WebAPI/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/09/27/javascript/WebAPI/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -320,7 +346,7 @@
     </a>
   
   
-    <a href="/2022/09/16/Tips/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/09/16/tips/Tips/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Tips</div>
     </a>
@@ -359,7 +385,11 @@
       <ul>
         
           <li>
-            <a href="/2022/10/09/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
+            <a href="/2022/10/15/Ajax-Node/">Ajax-Node-服务端相关</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">GitHub相关</a>
           </li>
         
           <li>
@@ -367,15 +397,11 @@
           </li>
         
           <li>
-            <a href="/2022/09/27/ES6/">ES6</a>
+            <a href="/2022/09/27/javascript/ES6+/">ES6+</a>
           </li>
         
           <li>
-            <a href="/2022/09/27/WebAPI/">WebAPI</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/16/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">Javascript基础语法</a>
+            <a href="/2022/09/27/javascript/WebAPI/">WebAPI</a>
           </li>
         
       </ul>
