@@ -15,7 +15,7 @@
 <meta property="og:description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-16T11:16:32.000Z">
-<meta property="article:modified_time" content="2022-10-17T10:26:25.033Z">
+<meta property="article:modified_time" content="2022-10-21T03:01:30.628Z">
 <meta property="article:author" content="Li Ping">
 <meta name="twitter:card" content="summary">
   
@@ -99,7 +99,7 @@
 <h2 id="ECMAscript数值范围："><a href="#ECMAscript数值范围：" class="headerlink" title="ECMAscript数值范围："></a>ECMAscript数值范围：</h2><p>JavaScript能表示的数值范围在 [min_value，max_value] 中，超过最小值时转为-infinity；超过最大值时转为Infiniti；表示负/正无穷大，他们都不能继续参与运算。</p>
 <p>检测数值是否在可表示范围内时，可以使用isFinite(数值)，返回值是布尔值，在可表示范围内返回true，否则返回false。</p>
 <hr>
-<h2 id="JavaScript执行机制"><a href="#JavaScript执行机制" class="headerlink" title="JavaScript执行机制"></a>JavaScript执行机制</h2><h3 id="扩展知识："><a href="#扩展知识：" class="headerlink" title="扩展知识："></a>扩展知识：</h3><p>0、JavaScript是单线程程序处理机制。HTML5提出允许JavaScript创建多个子线程，但其完全被主线程操控且不能操作DOM，所以其本质还是单线程。</p>
+<h2 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h2><h3 id="扩展知识："><a href="#扩展知识：" class="headerlink" title="扩展知识："></a>扩展知识：</h3><p>0、JavaScript是单线程程序处理机制。HTML5提出允许JavaScript创建多个子线程，但其完全被主线程操控且不能操作DOM，所以其本质还是单线程。</p>
 <p>1、进程：一个具有独立功能的程序在一个数据集上的一次动态执行的过程，进程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。</p>
 <blockquote>
 <ul>
@@ -139,12 +139,17 @@
 </ul>
 </li>
 </ul>
-<h3 id="执行机制："><a href="#执行机制：" class="headerlink" title="执行机制："></a>执行机制：</h3><p>1、同步任务与异步任务进入不同的执行场所：同步–主线程，异步– event table，并注册函数。（每一个异步任务都会注册事件函数等待触发）</p>
-<p>2、触发异步任务的注册事件时将任务推入任务队列；</p>
+<h3 id="执行机制："><a href="#执行机制：" class="headerlink" title="执行机制："></a>执行机制：</h3><p>0、执行代码，发现异步交给宿主环境。JS引擎执行同步代码，宿主环境执行异步代码。</p>
+<p>1、同步任务与异步任务进入不同的执行场所：同步–主线程，异步– event table，并注册函数。（每一个异步任务都会注册事件函数等待触发）</p>
+<p>2、触发异步任务注册的事件时将任务的回调函数推入任务队列；</p>
 <p>3、等待主线程执行完毕，读取任务队列中的函数进入主线程执行。</p>
 <p>4、event loop：主线程执行完毕（执行栈为空）并查找任务队列的过程重复执行。</p>
 <p>5、JS引擎的<code>monitoring process</code>进程会不断检测执行栈是否为空。</p>
-<h4 id="宏任务-微任务"><a href="#宏任务-微任务" class="headerlink" title="宏任务/微任务"></a>宏任务/微任务</h4><p>异步任务又被划分为宏任务和微任务</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// promise实例中执行异步任务，但log1，2是全局代码会先执行</span></span><br><span class="line">-------------------------例子</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步宏任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resove, reject</span>) &#123;  <span class="comment">// new 实例时相当于直接调用构造函数中的立即执行函数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>) <span class="comment">// 立即执行函数被调用 同步</span></span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>) <span class="comment">// 同步--函数调用</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;  <span class="comment">// 异步微任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>)  <span class="comment">// 同步</span></span><br><span class="line"><span class="comment">// 结果：1 3 4 OK 2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="宏任务-微任务"><a href="#宏任务-微任务" class="headerlink" title="宏任务/微任务"></a>宏任务/微任务</h4><p>异步任务又被划分为宏任务和微任务，不论宏任务微任务，任务队列中存放的都是他们的回调函数，等待主线程查找。</p>
 <p>宏任务：由宿主环境发起的任务，包括全局代码，setInterval,setTimeout…</p>
 <p>微任务：由js自身发起，包括promise.then(),process.nextTick()…</p>
 <p>执行：</p>
@@ -183,6 +188,7 @@
 <p>3、e.target.files 获取上传的文件对象，返回伪数组，通过下表获取具体文件。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、过滤</span></span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> accept=<span class="string">&quot;.jpg,.png&quot;</span>&gt;</span><br><span class="line"><span class="comment">// 2、绑定事件</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;input&#x27;</span>).<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="comment">// 3、获取文件：伪数组</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>)</span><br><span class="line">  <span class="comment">// 3、获取具体某个文件</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><code>注意</code>：当第一次选择文件之后，第二次选择文件时点击取消，此时files从有值变成了空，也会触发change事件。一般情况下这次触发change没有意义，所以先判断e.target.files[0]中是否有值才进行后续操作。</p>
 <h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>文件上传按钮设置CSS样式时，文字图片也随之改变，即无法单独设置样式。所以开发中一般将其隐藏，使用别的按钮代替触发file的默认点击事件。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、隐藏input type=&quot;file&quot;</span></span><br><span class="line"><span class="comment">// 2、设置新按钮</span></span><br><span class="line"><span class="comment">// 3、新按钮点击触发原始input的点击事件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -190,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9grqo1m0006x1wn8i4f6qgh" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9hxbyxw0005sqwn9l1oftkn" class="article-share-link">Share</a>
       
       
     </footer>
