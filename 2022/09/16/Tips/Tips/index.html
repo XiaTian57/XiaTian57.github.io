@@ -7,15 +7,15 @@
   
   <title>Tips | Hexo-Li</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
+  <meta name="description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值为undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tips">
 <meta property="og:url" content="https://xiatian57.github.io/2022/09/16/tips/Tips/index.html">
 <meta property="og:site_name" content="Hexo-Li">
-<meta property="og:description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
+<meta property="og:description" content="undefined和null类型：undefined：当变量声明未初始化时，typeof检测变量值为undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。 null:null逻辑上表示空对象指针，为typeof传入nul">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-16T11:16:32.000Z">
-<meta property="article:modified_time" content="2022-10-21T03:01:30.628Z">
+<meta property="article:modified_time" content="2022-10-29T03:26:28.607Z">
 <meta property="article:author" content="Li Ping">
 <meta name="twitter:card" content="summary">
   
@@ -89,7 +89,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="undefined和null类型："><a href="#undefined和null类型：" class="headerlink" title="undefined和null类型："></a>undefined和null类型：</h2><h3 id="undefined："><a href="#undefined：" class="headerlink" title="undefined："></a>undefined：</h3><p>当变量声明未初始化时，typeof检测变量值未undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。</p>
+<h2 id="undefined和null类型："><a href="#undefined和null类型：" class="headerlink" title="undefined和null类型："></a>undefined和null类型：</h2><h3 id="undefined："><a href="#undefined：" class="headerlink" title="undefined："></a>undefined：</h3><p>当变量声明未初始化时，typeof检测变量值为undefined；当变量未声明时不能进行除typeof之外的其他操作，且对未声明的变量检测typeof时值也是undefined；–&gt;所以，建议声明变量时同时初始化，让其区别于变量未声明却typeof时的undefined。</p>
 <h3 id="null"><a href="#null" class="headerlink" title="null:"></a>null:</h3><p>null逻辑上表示空对象指针，为typeof传入null、空数组字面量、空对象字面量时返回object；在声明将来要保存对象值的变量时建议使用null进行初始化，这样只需要检查变量类型是不是null就能知道变量有没有被重新赋予一个对象的引用。</p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>null是空对象指针，undefined只是变量未初始化。</p>
 <hr>
@@ -97,7 +97,7 @@
 <h3 id="精确数位："><a href="#精确数位：" class="headerlink" title="精确数位："></a>精确数位：</h3><p>计算机中的浮点数精确到小数点后17位，所以算术运算小数点后的值并没有整数精确。例如：0.1 + 0.2  !==0.3；因此不建议测试某个特定浮点值。</p>
 <hr>
 <h2 id="ECMAscript数值范围："><a href="#ECMAscript数值范围：" class="headerlink" title="ECMAscript数值范围："></a>ECMAscript数值范围：</h2><p>JavaScript能表示的数值范围在 [min_value，max_value] 中，超过最小值时转为-infinity；超过最大值时转为Infiniti；表示负/正无穷大，他们都不能继续参与运算。</p>
-<p>检测数值是否在可表示范围内时，可以使用isFinite(数值)，返回值是布尔值，在可表示范围内返回true，否则返回false。</p>
+<p>检测数值是否在可表示范围内时，可以使用isFinite(数值)，返回值是布尔值；在可表示范围内返回true，否则返回false。</p>
 <hr>
 <h2 id="JS执行机制"><a href="#JS执行机制" class="headerlink" title="JS执行机制"></a>JS执行机制</h2><h3 id="扩展知识："><a href="#扩展知识：" class="headerlink" title="扩展知识："></a>扩展知识：</h3><p>0、JavaScript是单线程程序处理机制。HTML5提出允许JavaScript创建多个子线程，但其完全被主线程操控且不能操作DOM，所以其本质还是单线程。</p>
 <p>1、进程：一个具有独立功能的程序在一个数据集上的一次动态执行的过程，进程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。</p>
@@ -133,19 +133,19 @@
 <li>渲染进程下的线程：<ul>
 <li>GUI渲染线程：解析html，css构建DOM树，布局等；与JS解析引擎线程互斥</li>
 <li>JS引擎：负责处理JS脚本，浏览器同时只能有一个JS引擎线程在运行JS。因为与GUI互斥，JS可能会阻塞页面渲染。</li>
-<li>定时器线程：setInterval，set Timeout</li>
+<li>定时器线程：setInterval，setTimeout</li>
 <li>事件触发线程：当事件触发时将事件推到处理队列等待主线程执行。</li>
 <li>异步请求线程：当XMLHttpRequest 链接后浏览器开启线程，检测请求状态变更，将回调函数推入任务队列。</li>
 </ul>
 </li>
 </ul>
 <h3 id="执行机制："><a href="#执行机制：" class="headerlink" title="执行机制："></a>执行机制：</h3><p>0、执行代码，发现异步交给宿主环境。JS引擎执行同步代码，宿主环境执行异步代码。</p>
-<p>1、同步任务与异步任务进入不同的执行场所：同步–主线程，异步– event table，并注册函数。（每一个异步任务都会注册事件函数等待触发）</p>
-<p>2、触发异步任务注册的事件时将任务的回调函数推入任务队列；</p>
+<p>1、同步任务与异步任务进入不同的执行场所：同步–主线程，异步– event table。</p>
+<p>2、异步任务执行完毕将回调函数推入任务队列；</p>
 <p>3、等待主线程执行完毕，读取任务队列中的函数进入主线程执行。</p>
 <p>4、event loop：主线程执行完毕（执行栈为空）并查找任务队列的过程重复执行。</p>
 <p>5、JS引擎的<code>monitoring process</code>进程会不断检测执行栈是否为空。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// promise实例中执行异步任务，但log1，2是全局代码会先执行</span></span><br><span class="line">-------------------------例子</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步宏任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resove, reject</span>) &#123;  <span class="comment">// new 实例时相当于直接调用构造函数中的立即执行函数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>) <span class="comment">// 立即执行函数被调用 同步</span></span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>) <span class="comment">// 同步--函数调用</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;  <span class="comment">// 异步微任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>)  <span class="comment">// 同步</span></span><br><span class="line"><span class="comment">// 结果：1 3 4 OK 2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span>(<span class="params">resove,reject</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// promise实例中执行异步任务，但log1，2不是异步任务（promise实例用来执行异步任务，但不是只能执行异步任务）</span></span><br><span class="line">-------------------------例子</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>) <span class="comment">// 同步</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// 异步宏任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resove, reject</span>) &#123;  <span class="comment">// new 实例时相当于直接调用构造函数中的立即执行函数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>) <span class="comment">// 立即执行函数被调用 同步</span></span><br><span class="line">  <span class="title function_">resove</span>(<span class="string">&#x27;ok&#x27;</span>) <span class="comment">// 同步--函数调用</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;  <span class="comment">// 异步微任务</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>)  <span class="comment">// 同步</span></span><br><span class="line"><span class="comment">// 结果：1 3 4 OK 2</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -168,7 +168,7 @@
 <h2 id="获取表单数据"><a href="#获取表单数据" class="headerlink" title="获取表单数据"></a>获取表单数据</h2><p>当表单项特别多时，可以使用第三方库或新版本JS内置对象FormData一次性获取所有表单数据并存储为对象返回。</p>
 <h3 id="一、form-serialize"><a href="#一、form-serialize" class="headerlink" title="一、form-serialize:"></a>一、<code>form-serialize</code>:</h3><p>1、下载serialize的JS库文件并引入；</p>
 <p>2、语法：serialize(form表单对象，{hash:布尔值})</p>
-<p>当布尔值为true，将表单数据收集组织为对象；</p>
+<p>当布尔值为true，将表单数据收集组织为对象；对象中的数据都是字符串格式。</p>
 <p>当布尔值为false，将表单数据收集组织为get请求后拼接的参数形式的字符串。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="title function_">serialize</span>(<span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;form&#x27;</span>), &#123; <span class="attr">hash</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data) <span class="comment">//&#123;表单name：表单值，表单name：表单值&#125;</span></span><br><span class="line"><span class="comment">// 所以表单name最好与请求参数名一致。方便</span></span><br></pre></td></tr></table></figure>
 
@@ -185,18 +185,27 @@
 <p><code>注意</code>：不能一开始就获取，要表单项通过验证以后在触发提交事件时才获取，这时候的参数值才是需要提交给接口的参数。一开始就获取的话值为空，接口报错422，参数错误。</p>
 <h2 id="表单–文件上传："><a href="#表单–文件上传：" class="headerlink" title="表单–文件上传："></a>表单–文件上传：</h2><p>1、accept 属性，过滤选择的文件后缀，当点击选择文件时只出现accept中过滤的后缀文件</p>
 <p>2、change事件，当表单上传的文件发生变化时触发change事件</p>
-<p>3、e.target.files 获取上传的文件对象，返回伪数组，通过下表获取具体文件。</p>
+<p>3、e.target.files 获取上传的文件对象，返回伪数组，通过下标获取具体文件。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、过滤</span></span><br><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> accept=<span class="string">&quot;.jpg,.png&quot;</span>&gt;</span><br><span class="line"><span class="comment">// 2、绑定事件</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;input&#x27;</span>).<span class="property">onchange</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="comment">// 3、获取文件：伪数组</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>)</span><br><span class="line">  <span class="comment">// 3、获取具体某个文件</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">files</span>[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>注意</code>：当第一次选择文件之后，第二次选择文件时点击取消，此时files从有值变成了空，也会触发change事件。一般情况下这次触发change没有意义，所以先判断e.target.files[0]中是否有值才进行后续操作。</p>
 <h3 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h3><p>文件上传按钮设置CSS样式时，文字图片也随之改变，即无法单独设置样式。所以开发中一般将其隐藏，使用别的按钮代替触发file的默认点击事件。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、隐藏input type=&quot;file&quot;</span></span><br><span class="line"><span class="comment">// 2、设置新按钮</span></span><br><span class="line"><span class="comment">// 3、新按钮点击触发原始input的点击事件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>在登录时，如果不走登陆页面而直接地址栏输入地址会发生不需要验证用户名密码也能进入主页的情况。逻辑上这样是不允许的。</p>
+<p>解决办法：token认证；</p>
+<p>1、用户第一次登录时服务端返回token并存储，用户的每次页面跳转和请求操作都需要在请求头中携带token，由服务端验证token真伪时效。</p>
+<p>2、需要token认证的界面：前端判断本地是否有token，后端路由守卫验证是否携带了token。（前端自查，后端阻止）前端自查意义不大，可以携带假token。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需要登陆才能跳转index页面</span></span><br><span class="line"><span class="comment">// 前端在index.html页面头部自查token，没有则不继续请求。强制跳转登录。</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">  <span class="comment">// 一定是在所有其他资源请求的最顶部(包括body解构的html请求)</span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">let</span> token = <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token&#x27;</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">if</span>(!token)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  location.<span class="property">href</span>=<span class="string">&#x27;/login.html&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">  <span class="comment">// 其他link</span></span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="json-server"><a href="#json-server" class="headerlink" title="json-server"></a>json-server</h2><p>node模块，通过运行express服务器，可以直接将json格式文件当作接口进行数据测试。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装：</span></span><br><span class="line">npm i -g json-server</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">json-server --watch db.<span class="property">json</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9hxbyxw0005sqwn9l1oftkn" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9yysd8h00074zwncyj9639p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -249,11 +258,15 @@
       <ul>
         
           <li>
-            <a href="/2022/10/15/Ajax-Node/">Ajax-Node-服务端相关</a>
+            <a href="/2022/10/31/framework/vue/">vue</a>
           </li>
         
           <li>
-            <a href="/2022/10/09/tips/Mac-%E6%90%AD%E5%BB%BAhexo-%E5%8D%9A%E5%AE%A2/">搭建hexo博客并部署到GitHub</a>
+            <a href="/2022/10/15/framework/Ajax-Node/">Ajax-Node-服务端相关</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/09/tips/Mac/">Mac 一些操作</a>
           </li>
         
           <li>
@@ -262,10 +275,6 @@
         
           <li>
             <a href="/2022/09/27/javascript/ES6+/">ES6+</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/27/javascript/WebAPI/">WebAPI</a>
           </li>
         
       </ul>

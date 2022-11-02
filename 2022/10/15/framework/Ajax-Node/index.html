@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Ajax-Node-服务端相关 | Hexo-Li</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过JS代码与服务器通讯而不通过浏览器，实现页面的局部刷新。 Ajax通过JS内置XMLHttpRequest对象实现与服务器的通讯。 步骤： 1、实例化XMLHttpRequest对象 2、设置请求方式与请求地址 3、发送请求 4、处理响应 1234567891011121314151617181920---------------------get 请求。参数地址拼接&#x2F;&#x2F; 1、实例化XMLHt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax-Node-服务端相关">
+<meta property="og:url" content="https://xiatian57.github.io/2022/10/15/framework/Ajax-Node/index.html">
+<meta property="og:site_name" content="Hexo-Li">
+<meta property="og:description" content="通过JS代码与服务器通讯而不通过浏览器，实现页面的局部刷新。 Ajax通过JS内置XMLHttpRequest对象实现与服务器的通讯。 步骤： 1、实例化XMLHttpRequest对象 2、设置请求方式与请求地址 3、发送请求 4、处理响应 1234567891011121314151617181920---------------------get 请求。参数地址拼接&#x2F;&#x2F; 1、实例化XMLHt">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xiatian57.github.io/Users/liping/blog/source/_posts/images/webpack.png">
+<meta property="article:published_time" content="2022-10-15T01:41:45.000Z">
+<meta property="article:modified_time" content="2022-10-31T03:21:13.956Z">
+<meta property="article:author" content="Li Ping">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiatian57.github.io/Users/liping/blog/source/_posts/images/webpack.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo-Li" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo-Li</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://XiaTian57.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-framework/Ajax-Node" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/10/15/framework/Ajax-Node/" class="article-date">
+  <time datetime="2022-10-15T01:41:45.000Z" itemprop="datePublished">2022-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax-Node-服务端相关
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过JS代码与服务器通讯而不通过浏览器，实现页面的局部刷新。</p>
+<p>Ajax通过JS内置XMLHttpRequest对象实现与服务器的通讯。</p>
+<p>步骤：</p>
+<p>1、实例化XMLHttpRequest对象</p>
+<p>2、设置请求方式与请求地址</p>
+<p>3、发送请求</p>
+<p>4、处理响应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---------------------get 请求。参数地址拼接</span><br><span class="line"><span class="comment">// 1、实例化XMLHttpRequest对象</span></span><br><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span><br><span class="line"><span class="comment">// 2、设置请求方式和地址</span></span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;get&#x27;</span>,<span class="string">&#x27;url?参数&#x27;</span>)</span><br><span class="line"><span class="comment">// 3、发送请求,请求方式不同send内容不同</span></span><br><span class="line">xhr.<span class="title function_">send</span>()</span><br><span class="line"><span class="comment">// 4、处理响应 onload不需要判断响应状态，onchange状态变化触发时需要判断</span></span><br><span class="line">xhr.<span class="property">onload</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> res=xhr.<span class="property">response</span></span><br><span class="line">&#125;</span><br><span class="line">-------------------- post请求。参数send传递，需要设置请求头content-type</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;get&#x27;</span>,<span class="string">&#x27;url?参数&#x27;</span>)</span><br><span class="line"><span class="comment">// 设置请求头content- type 规定响应页面编码和参数格式</span></span><br><span class="line">xhr. xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;content-type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>)  <span class="comment">// 常用还有application/json格式</span></span><br><span class="line"><span class="comment">// 参数在send中</span></span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="string">&#x27;name=zs&amp;age=18&#x27;</span>) <span class="comment">// x-www-form 格式</span></span><br><span class="line">xhr.<span class="title function_">send</span>(&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zs&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="string">&quot;19&quot;</span>&#125;) <span class="comment">// json 格式</span></span><br><span class="line">-------------------   携带authorization 的请求</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><p>1、get：常用于请求数据</p>
+<p>2、post：常用于提交数据</p>
+<p>3、put：修改服务器数据，修改大量字段；</p>
+<p>4、patch：修改服务器数据，少量修改；</p>
+<p>5、delete：删除服务器上的数据。</p>
+<p>6、head：获取资源的元数据。</p>
+<p>7、options：获取信息，关于资源的哪些属性是客户端可以改变的。</p>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>axios()方法返回promise对象，如果调用.then()方法处理请求结果则可以解析promise对象为普通对象。</p>
+<h3 id="axios-get"><a href="#axios-get" class="headerlink" title="axios.get()"></a>axios.get()</h3><p>发起get请求，从接口获取数据；</p>
+<p>语法：axios.get(‘url?参数=值&amp;参数=值’)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://autumnfish.cn/api/joke/list?num=2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>语法：axis.get(‘url’,{params:{参数：参数值}})</p>
+<p>get配置对象除了可以设置参数params还可以设置其他属性字段。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://autumnfish.cn/api/joke/list&#x27;</span>,&#123;<span class="attr">params</span>:&#123;<span class="attr">num</span>:<span class="number">2</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="axios-post"><a href="#axios-post" class="headerlink" title="axios.post()"></a>axios.post()</h3><p>发起post请求向接口提交数据；</p>
+<p>语法：axis.post(‘url’,{参数对象})</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="title function_">post</span>(<span class="string">&#x27;https://autumnfish.cn/api/joke/list&#x27;</span>,&#123;参数：参数值&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>语法：axis.post(‘url’,{参数对象}，{headers：{配置对象}})</p>
+<p>post配置对象用于设置请求头，与get不同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;https://autumnfish.cn/api/joke/list&#x27;</span>,&#123;参数对象&#125;,&#123;<span class="attr">headers</span>:&#123;<span class="attr">token</span>:<span class="string">&#x27;token字段值&#x27;</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="axios-1"><a href="#axios-1" class="headerlink" title="axios()"></a>axios()</h3><p>参数格式为对象，对象中包含请求方式，请求地址，请求参数信息。</p>
+<p>其中：请求参数，get请求参数写在params对象字段中。post请求body的参数写在data字段中。请求头设置写在headers字段中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="attr">method</span>:<span class="string">&#x27;get||post||push||patch||delete....&#x27;</span>,</span><br><span class="line">  <span class="attr">params</span>:&#123;get参数&#125;,</span><br><span class="line">  <span class="attr">data</span>:&#123;post参数&#125;,</span><br><span class="line">  <span class="attr">headers</span>:&#123;请求头设置，例如token&#125;</span><br><span class="line">&#125;)</span><br><span class="line">-----------------------------------</span><br><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">  <span class="attr">url</span>:</span><br><span class="line"> <span class="string">&#x27;https://autumnfish.cn/api/joke/list&#x27;</span>,</span><br><span class="line">  <span class="attr">params</span>: &#123;</span><br><span class="line">    <span class="attr">num</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">&#123; data: res &#125;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="基地址："><a href="#基地址：" class="headerlink" title="基地址："></a>基地址：</h3><p>所有接口布置在同一个服务器域名的时候可以设置基地址，在axios()url中只需要传入具体页面地址，axios会自动拼接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、配置基地址：axios.defaults.baseURL = &#x27;基地址&#x27;</span></span><br><span class="line">axios.<span class="property">defaults</span>.<span class="property">baseURL</span> = <span class="string">&#x27;https://autumnfish.cn&#x27;</span></span><br><span class="line"><span class="comment">// 2、axios 设置具体地址</span></span><br><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">method</span>:<span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;/api/login&#x27;</span>,</span><br><span class="line">  <span class="attr">data</span>:&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="拦截器："><a href="#拦截器：" class="headerlink" title="拦截器："></a>拦截器：</h3><p>都有两个回调函数，在各自的error回调中处理错误。</p>
+<p>1、请求拦截器：</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span>(<span class="params">config</span>)&#123; </span><br><span class="line">   <span class="comment">// config是axios请求的配置对象。 </span></span><br><span class="line">   <span class="comment">// 必须 </span></span><br><span class="line">   <span class="keyword">return</span> config</span><br><span class="line"> &#125;,<span class="keyword">function</span>(<span class="params">error</span>)&#123;</span><br><span class="line">   <span class="comment">// 处理错误</span></span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用场景：当用户的请求都需要携带token时，可以让请求拦截器统一设置token而不用每一个请求都写一遍。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span>(<span class="params">config</span>)&#123; </span><br><span class="line">  <span class="comment">// 统一设置token</span></span><br><span class="line">   config.<span class="property">headers</span>=&#123;</span><br><span class="line">     <span class="attr">authorization</span>:token</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> config</span><br><span class="line"> &#125;,<span class="keyword">function</span>(<span class="params">error</span>)&#123;</span><br><span class="line">   <span class="comment">// 处理错误</span></span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、响应拦截器：</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="property">interceptors</span>.<span class="property">response</span>.<span class="title function_">use</span>(<span class="keyword">function</span>(<span class="params">response</span>)&#123;</span><br><span class="line">  <span class="comment">// 处理响应</span></span><br><span class="line">  <span class="comment">// 必须 </span></span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;,<span class="keyword">function</span>(<span class="params">error</span>)&#123;</span><br><span class="line">  <span class="comment">//处理服务器返回的异常</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><h3 id="http状态码："><a href="#http状态码：" class="headerlink" title="http状态码："></a>http状态码：</h3><p>1、200 ： 请求成功</p>
+<p>2、400相关：程序员代码出错导致的错误</p>
+<p>   400 ： 请求方式或参数出错</p>
+<p>   401 ： 身份验证token未通过</p>
+<p>   404 ： 资源地址出错，服务器找不到</p>
+<p>3、500 ： 服务器出错，导致请求失败。</p>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><h3 id="初始配置："><a href="#初始配置：" class="headerlink" title="初始配置："></a>初始配置：</h3><p>1、设用用户名和邮箱</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="variable language_">global</span> user.<span class="property">name</span> <span class="string">&#x27;名字&#x27;</span></span><br><span class="line">git config --<span class="variable language_">global</span> user.<span class="property">email</span> <span class="string">&#x27;邮箱&#x27;</span></span><br><span class="line"><span class="comment">// 查看刚才的设置</span></span><br><span class="line">git config user.<span class="property">name</span></span><br><span class="line">git config user.<span class="property">email</span></span><br></pre></td></tr></table></figure>
+
+<p>2、初始化本地仓库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// git 将文件夹作为仓库 </span></span><br><span class="line">git init</span><br><span class="line"><span class="comment">// 生成.git 的配置文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="三个区："><a href="#三个区：" class="headerlink" title="三个区："></a>三个区：</h3><p>1、工作区：除忽略文件外的根目录下的代码等文件。</p>
+<p>2、暂存区：由git维护。提交暂存时文件存放的区域，提交一次备份一次。如果有修改则备份文件，没有修改则备份引用。</p>
+<p>3、本地仓库：由git维护。存放缓存文件的提交。</p>
+<h3 id="操作命令："><a href="#操作命令：" class="headerlink" title="操作命令："></a>操作命令：</h3><p>1、查看文件状态：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p>2、跟踪新文件或添加暂存</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名  <span class="comment">// 操作单个文件</span></span><br><span class="line">git add .     <span class="comment">// 操作所有文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 移除暂存</span></span><br><span class="line">git rm --cached 文件名 <span class="comment">// 只移除该文件不递归</span></span><br><span class="line">git rm -r --cached 文件名 <span class="comment">// 递归移除</span></span><br><span class="line">git rm -f <span class="comment">//全部移除</span></span><br></pre></td></tr></table></figure>
+
+<p>3、提交本地</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;描述信息&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>每commit一次就记录一次快照，有差异则备份整个完整文件，没有差异则拷贝引用。</p>
+<p>4、查看提交日志</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git log  <span class="comment">// 倒序排列所有提交历史</span></span><br><span class="line">git log -<span class="number">2</span> <span class="comment">// 显示最近两行提交历史</span></span><br><span class="line">git log --online</span><br></pre></td></tr></table></figure>
+
+<p>5、回退历史版本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先查看log，复制要退回的版本ID</span></span><br><span class="line">git log</span><br><span class="line"><span class="comment">// 回退指定ID</span></span><br><span class="line">git reset --hard <span class="variable constant_">ID</span></span><br></pre></td></tr></table></figure>
+
+<p>6、从历史版本回到新版本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 处于历史版本时git log 不能查看到旧版本之后的修改</span></span><br><span class="line"><span class="comment">// 想查看所有提交记录</span></span><br><span class="line">git reflog --pretty=online</span><br><span class="line"><span class="comment">// 回退到最新ID</span></span><br><span class="line">git reset --hard <span class="variable constant_">ID</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分支："><a href="#分支：" class="headerlink" title="分支："></a>分支：</h3><p>临时从主分支上克隆出来用于专门开发某些功能，开发完成后合并到主分支。</p>
+<p>1、查看分支</p>
+<p>分支前面的*表示当前所处的分支。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>2、创建分支</p>
+<p>新分支修改时进行增量备份，以便于其他分支也进行修改互不影响。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+
+<p>3、切换分支</p>
+<p>切换前尽量保证原来所处的分支干净。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br><span class="line"><span class="comment">// 新语句 替换checkout</span></span><br><span class="line">git <span class="keyword">switch</span> 分支名</span><br></pre></td></tr></table></figure>
+
+<p>4、快速创建并切换分支</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 分支名</span><br></pre></td></tr></table></figure>
+
+<p>5、合并分支</p>
+<p>将子分支合并到主分支上，需要先切换到主分支才能进行操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master <span class="comment">// 切换回主分支</span></span><br><span class="line">git merge 子分支名</span><br></pre></td></tr></table></figure>
+
+<p>如果同一个文件在不同的分支中进行了不同的修改，则需要手动合并差异后再添加暂存和提交</p>
+<p>6、删除分支</p>
+<p>删除分支需要先处于主分支，且子分支内容要先合并到主分支上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名</span><br><span class="line"><span class="comment">// 未合并，强制删除</span></span><br><span class="line">git branch -D 分支名</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>1、本地仓库推送远程仓库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先创建远程仓库</span></span><br><span class="line"><span class="comment">// 本地仓库与远程仓库建立连接</span></span><br><span class="line">git remote add 别名 远程地址</span><br><span class="line"><span class="comment">// 推送本地代码</span></span><br><span class="line">git push 仓库别名：仓库分支  本地分支</span><br><span class="line"><span class="comment">// 本地分支和远程分支同名可简写：一般都同名</span></span><br><span class="line">git push 仓库别名 分支名</span><br><span class="line"><span class="comment">// 推送时要确保本地仓库工作区干净（没有未提交）</span></span><br></pre></td></tr></table></figure>
+
+<p>2、本地仓库拉取远程仓库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 与远程仓库建立连接</span></span><br><span class="line">git remote add 别名 仓库地址</span><br><span class="line"><span class="comment">// 拉取仓库有而本地没有的</span></span><br><span class="line">git pull 别名 本地分支</span><br></pre></td></tr></table></figure>
+
+<p>3、克隆远程仓库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不给文件夹默认存放执行git的文件夹</span></span><br><span class="line">git clone 远程地址 存放文件夹</span><br></pre></td></tr></table></figure>
+
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>node下的包管理工具 npm ,pnpm,yarn;pnpm和yarn没有默认启用，需要输入命令手动启用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">corepack enable</span><br><span class="line"><span class="comment">// 启用后查看pnpm和yarn 版本</span></span><br><span class="line">pnpm -v</span><br><span class="line">yarn -v</span><br><span class="line"><span class="comment">// 停用</span></span><br><span class="line">corepack disable </span><br><span class="line"><span class="comment">// 对npm需要单独设置</span></span><br></pre></td></tr></table></figure>
+
+<p>项目中的配置文件package.json根结点属性：packageManager指定该项目使用的包管理工具版本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// packge.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    <span class="comment">// 包管理工具指定</span></span><br><span class="line">  <span class="string">&quot;packgeManager&quot;</span>:<span class="string">&quot;pnpm@7.5.2&quot;</span></span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;module&quot;</span>,</span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;a.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;keywords&quot;</span>: [],</span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时再使用别的管理工具下载包就会抛出错误，避免包管理工具不同，版本不同下载的包版本不同带来报错。</p>
+<p><code>注意</code>：npm 作为全局包管理工具默认不会被拦截，即使指定了包管理工具npm也可以运行。如果不想让他运行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">corepack enable npm</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置全局变量"><a href="#内置全局变量" class="headerlink" title="内置全局变量"></a>内置全局变量</h3><p>1、__dirname   获取当前文件的完整路径</p>
+<p>2、__filename  获取当前（包含路径的）文件名</p>
+<h3 id="内置全局对象"><a href="#内置全局对象" class="headerlink" title="内置全局对象"></a>内置全局对象</h3><p>1、global：使用时可以省略global。</p>
+<p>setTimeout()</p>
+<p>setInterval()</p>
+<p>2、module：模块，一个JS文件就是一个模块；</p>
+<p>module.exports 调用exports属性挂载需要与其他模块共享的数据（对象）；</p>
+<p>3、exports：向其他模块共享成员。</p>
+<p>单独使用exports也可以实现共享，如果exports本身没有创建新对象则指向module.exports共享的对象，如果创建了新对象则以module共享的对象为准，如果没有创建新对象但挂载了module.exports对象中没有的成员，则向module.exports的对象中添加成员。</p>
+<p>4、require：导入模块（内置模块，第三方模块，以文件作为模块）</p>
+<p>导入第三方或内置模块只需要提供模块名，包名；导入自定义模块（自己的JS文件）必须添加路径。</p>
+<h3 id="内置模块"><a href="#内置模块" class="headerlink" title="内置模块"></a>内置模块</h3><p><code>注意</code>：在node中路径 ./ 或 ../ 不再相对于当前文件，而是相对于执行node的根路径，所以在进行路径拼接时可能会路径拼接出错。使用__dirname获得当前文件的完整路径再拼接。</p>
+<h4 id="fs模块："><a href="#fs模块：" class="headerlink" title="fs模块："></a>fs模块：</h4><p>用于操作文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、先导入该模块</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 2、使用该模块</span></span><br><span class="line">fs.<span class="title function_">readfile</span>()</span><br></pre></td></tr></table></figure>
+
+<p>1、<code>fs.readFile() </code>读取文件内容，异步读取，读取成功后在回调函数中操作读取结果。</p>
+<p>语法：fs.readFile(‘文件地址’,读取编码,function(err,str){})</p>
+<p>不设置读取编码时返回buffer格式数据，回调函数第一个参数都留给错误参数，如果读取成功则err返回undefined,str返回读取到的内容（字符串）；如果读取失败err返回错误对象，str返回undefined。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./test.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err, str</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(str) <span class="comment">// 将文件读取为字符串</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>fs.readFileSync()</code> 同步读取，阻塞线程，等待读取结果才执行后续代码。</p>
+<p>语法：fs.readFileSync(‘文件地址’,’编码格式’)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> result = fs.<span class="title function_">readFileSync</span>(<span class="string">&#x27;./test.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br></pre></td></tr></table></figure>
+
+<p>使用try{}catch(err){}捕获读取失败的错误，</p>
+<p>2、<code>fs.writeFile()</code> 异步为文件写入内容</p>
+<p>语法：fs.writeFile(‘文件’,写入的数据,option配置对象，回调函数)</p>
+<p>写入数据必须是一个字符串或buffer格式的二进制，option可以没有，默认写入时编码格式为utf-8。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">writeFile</span>(<span class="string">&#x27;text2.txt&#x27;</span>, <span class="string">&#x27;three&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>fs.writeFileSync()</code> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;zs&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">data = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data)</span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;text2.txt&#x27;</span>, data)</span><br><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;text2.txt&#x27;</span>, <span class="string">&#x27;hello&#x27;</span>) <span class="comment">// 内容被覆盖</span></span><br></pre></td></tr></table></figure>
+
+<p><code>注意</code>：writeFile或writeFileSync先读取文件再覆盖内容，如果没有读取到文件则创建并写入。</p>
+<p>3、为文件追加内容</p>
+<p><code>fa.appendFile()</code>或<code>fs.appendFileSync()</code></p>
+<p>实现追加内容而不是覆盖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">writeFileSync</span>(<span class="string">&#x27;score.txt&#x27;</span>, <span class="string">`总成绩：330`</span>)</span><br><span class="line">fs.<span class="title function_">appendFileSync</span>(<span class="string">&#x27;score.txt&#x27;</span>, <span class="string">&#x27;\n我是追加的内容&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Path模块"><a href="#Path模块" class="headerlink" title="Path模块"></a>Path模块</h4><p>path模块的join()方法实现路径片段拼接。</p>
+<p>按顺序以路径规则拼接路径片段，遇到 ../ 则抵消一层路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先导入</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="comment">// join方法</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">join</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;./C&#x27;</span>, <span class="string">&#x27;../&#x27;</span>))  <span class="comment">// a/b  抵消了/C</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">join</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;../&#x27;</span>, <span class="string">&#x27;./C&#x27;</span>))  <span class="comment">// a/C  抵消了/b</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用当前路径作为起始进行拼接，使用__dirname代替./ ；因为在node中相对路径不再是相对于当前文件夹，而是相对于执行node的根目录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = fs.<span class="title function_">readFileSync</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;test.txt&#x27;</span>), <span class="string">&#x27;utf-8&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="http模块"><a href="#http模块" class="headerlink" title="http模块"></a>http模块</h4><p>手写基本服务器：</p>
+<p>1、导入模块</p>
+<p>2、创建服务器实例</p>
+<p>3、监听请求</p>
+<p>4、启动服务器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> server = http.<span class="title function_">creatServer</span>()</span><br><span class="line">server.<span class="title function_">on</span>(<span class="string">&#x27;request&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 处理请求</span></span><br><span class="line">&#125;)</span><br><span class="line">server.<span class="title function_">listen</span>(<span class="string">&#x27;端口号&#x27;</span>,<span class="function">()=&gt;</span>&#123;&#125;) <span class="comment">// 默认运行在 127.0.0.1</span></span><br></pre></td></tr></table></figure>
+
+<p>处理请求：</p>
+<p>1、请求对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">req.<span class="property">url</span> <span class="comment">// 请求地址</span></span><br><span class="line">req.<span class="property">method</span> <span class="comment">// 请求方式</span></span><br><span class="line">req.<span class="property">header</span> <span class="comment">// 请求头</span></span><br></pre></td></tr></table></figure>
+
+<p>2、响应对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">res.<span class="title function_">setHeader</span>(<span class="string">&#x27;头名&#x27;</span>,<span class="string">&#x27;头值&#x27;</span>) <span class="comment">// 设置响应头</span></span><br><span class="line">res.<span class="property">setStatusCode</span>=<span class="number">401</span> <span class="comment">// 设置响应码</span></span><br><span class="line">res.<span class="property">statusMessage</span>=<span class="string">&#x27;&#x27;</span> <span class="comment">// 响应描述</span></span><br><span class="line"><span class="comment">// 以上要在res.write之前设置，否则无效</span></span><br><span class="line"><span class="comment">// 响应内容需要设置响应头，否则乱码</span></span><br><span class="line">res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Conten-Type&#x27;</span>,<span class="string">&#x27;text/html;charset=utf-8&#x27;</span>)</span><br><span class="line"><span class="comment">// 综合设置响应信息（不是响应内容）</span></span><br><span class="line">esponse.<span class="title function_">writeHead</span>(<span class="number">200</span>,<span class="string">&#x27;success&#x27;</span>,&#123;<span class="string">&#x27;content-type&#x27;</span>:<span class="string">&#x27;text/html;charset=utf8&#x27;</span>&#125;)</span><br><span class="line"><span class="comment">// </span></span><br><span class="line">res.<span class="title function_">write</span>(<span class="string">&#x27;内容&#x27;</span>) <span class="comment">// 响应内容</span></span><br><span class="line">res.<span class="title function_">end</span>(内容)</span><br><span class="line">res.<span class="title function_">end</span>() <span class="comment">// 每一次响应都需要以end结尾</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>在ES6中认为一个JS文件就是一个模块，通过一个JS文件导入另一个JS文件实现模块之间的成员共享。</p>
+<p>历史：</p>
+<p>node– CommonJS  用于服务器端</p>
+<p>AMD/CMD          用于浏览器端</p>
+<p>不同语法规范并未统一市场，后来产生了ES6。统一模块化规范，既可以用于服务器端又可以用于浏览器端。</p>
+<p><code>扩展</code>：在node中启用ES6模块化语法</p>
+<p>项目下初始化package.json</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line"><span class="comment">// 启用ES6模块化</span></span><br><span class="line"><span class="comment">// package.json根结点下添加属性并赋值</span></span><br><span class="line"><span class="string">&quot;type&quot;</span>:<span class="string">&quot;module&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>1、引入文件/执行文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在a.js中引入b.js文件</span></span><br><span class="line"><span class="comment">// 在node中使用require导入</span></span><br><span class="line"><span class="comment">// 在ES6中使用import导入</span></span><br><span class="line"><span class="keyword">let</span> objb = <span class="built_in">require</span>(./b.<span class="property">js</span>)</span><br><span class="line"><span class="comment">// 执行a.js文件：此时b.js文件也会执行，</span></span><br><span class="line"><span class="comment">// 但a.js不能使用b.js中的成员</span></span><br></pre></td></tr></table></figure>
+
+<p>2、文件导出（共享成员）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module导出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">getFn</span>=getFn <span class="comment">// 导出函数</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">num</span>=num <span class="comment">//导出变量</span></span><br><span class="line"><span class="comment">// exports 导出</span></span><br><span class="line"><span class="built_in">exports</span>=&#123;&#125;</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">username</span>=<span class="string">&#x27;zs&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>单独使用exports也可以实现共享，如果exports本身没有创建新对象则指向module.exports共享的对象，如果创建了新对象则以module共享的对象为准，如果没有创建新对象但挂载了module.exports对象中没有的成员，则向module.exports的对象中添加成员。</p>
+<h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><p>Node 的包管理工具。</p>
+<p>项目中使用步骤：</p>
+<p>1、项目下初始化：项目文件夹不能是中文否则报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init     <span class="comment">// 需要手动设置package配置项</span></span><br><span class="line">npm init -y  <span class="comment">// 新项目快速创建包管理配置文件 package.json，记录包版本和包名。</span></span><br></pre></td></tr></table></figure>
+
+<p>2、下载：npm 官网会提示用于什么环境</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i 包名 -S  <span class="comment">// 用于上线运行的生产环境，默认值</span></span><br><span class="line">npm i 包名 -D  <span class="comment">// 只用于开发</span></span><br><span class="line">npm i 包名 -g  <span class="comment">// 全局工具包</span></span><br></pre></td></tr></table></figure>
+
+<p>3、删除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall 包名@版本号</span><br><span class="line"><span class="comment">// 简写</span></span><br><span class="line">npm un 包名@版本号</span><br></pre></td></tr></table></figure>
+
+<p>4、一键下载别人项目使用的包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install   <span class="comment">// 不给具体包名，会按照配置文件自己下载</span></span><br></pre></td></tr></table></figure>
+
+<p>5、查看安装的全局包路径</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm root -g</span><br></pre></td></tr></table></figure>
+
+<p>6、查看已经安装的包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看全局</span></span><br><span class="line">npm ls -g</span><br><span class="line">npm ls -g --depth <span class="number">0</span></span><br><span class="line"><span class="comment">// 查看项目包-s</span></span><br><span class="line">npm ls</span><br><span class="line">npm ls --depth <span class="number">0</span></span><br><span class="line"><span class="comment">// 只显示生产环境</span></span><br><span class="line">npm ls --depth <span class="number">0</span> --prod</span><br><span class="line"><span class="comment">// 只显示开发环境</span></span><br><span class="line">npm ls --depth <span class="number">0</span> --dev</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="同源策略-跨越"><a href="#同源策略-跨越" class="headerlink" title="同源策略/跨越"></a>同源策略/跨越</h3><p>浏览器的同源策略：协议、主机（域名）、端口号；三者全同才能算同源，对于不同源的请求，浏览器允许发送请求，但会拦截响应。</p>
+<p>目的：保护服务器数据的安全性。非同源不能随意访问。</p>
+<h4 id="实现跨域："><a href="#实现跨域：" class="headerlink" title="实现跨域："></a>实现跨域：</h4><p>1、服务器设置响应头：</p>
+<p>服务器端设置响应头，告诉浏览器服务器自己允许某些地址进行跨域请求。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server.<span class="title function_">on</span>(<span class="string">&#x27;request&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>,<span class="string">&#x27;*&#x27;</span>) <span class="comment">// * 表示允许所有地址，只允许某些直接列出来。</span></span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>2、cors </p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>在node环境下使用npm等包管理工具下载引入第三方包文件使用require引入，但浏览器无法识别解析这个包，也就不能正常解析代码。此时需要一些代码打包工具将这些第三方包转换为浏览器能识别的文件。常用webpack、browserfy等。</p>
+<p>最终html页面引入的JS文件应该是打包后输出的JS文件。</p>
+<p>webpack基于node，使用前需要先安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack </span><br><span class="line"><span class="comment">// --save-dev. 缩写-d</span></span><br><span class="line">npm install -d webpack-cli</span><br></pre></td></tr></table></figure>
+
+<p>webpack打包过程</p>
+<p><img src="/Users/liping/blog/source/_posts/images/webpack.png" alt="121667015929_.pic"></p>
+<h4 id="webpack配置项："><a href="#webpack配置项：" class="headerlink" title="webpack配置项："></a>webpack配置项：</h4><p>运行命令：</p>
+<p>在package.json的script节点下定义运行命令，这些命令可以通过npm run 运行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;webpack&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>在webpack.config.js配置文件中修改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// 配置项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置模式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// mode 节点可选production和development 生产模式和开发模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>入口：</p>
+<p>webpack从哪个文件开始查看依赖，开始打包编译。入口是JS文件。</p>
+<p>出口：</p>
+<p>webpack打包完成后将最终文件输出到哪个目录下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 入口：entry节点</span></span><br><span class="line">  <span class="attr">entry</span>: path.<span class="title function_">join</span>(__dirname,<span class="string">&#x27;./src/index.js&#x27;</span>)</span><br><span class="line">  <span class="comment">// 出口：output节点</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;./dist&#x27;</span>),</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;js/bundle.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>清空 dist 目录下的无关文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// 其他配置</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 清空出口目录下的无关文件</span></span><br><span class="line">  <span class="attr">clean</span>:<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>webpack.config.js下的其他节点配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// 配置模式</span></span><br><span class="line">  <span class="attr">mode</span>:<span class="string">&quot;development&quot;</span>, </span><br><span class="line">  <span class="comment">// 入口路径</span></span><br><span class="line">  <span class="attr">entry</span>:path.<span class="title function_">join</span>(<span class="string">&#x27;路径&#x27;</span>), </span><br><span class="line">  <span class="comment">// 出口路径</span></span><br><span class="line">  <span class="attr">output</span>:&#123; </span><br><span class="line">    <span class="attr">path</span>:path.<span class="title function_">join</span>(<span class="string">&#x27;路径&#x27;</span>),</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>:bundle.<span class="property">js</span>  </span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 清空输出路径下的无关文件</span></span><br><span class="line">  <span class="attr">clean</span>:<span class="string">&quot;true&quot;</span>, </span><br><span class="line">  <span class="comment">// 配置插件，是数组配置多个插件，</span></span><br><span class="line">  <span class="attr">plugin</span>:[],  </span><br><span class="line">  <span class="comment">// server配置项</span></span><br><span class="line">  <span class="attr">decServer</span>:&#123;</span><br><span class="line">  <span class="attr">open</span>:<span class="literal">true</span>, <span class="comment">// npm run dev 后打开浏览器</span></span><br><span class="line">  <span class="attr">host</span>:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>, <span class="comment">// server地址</span></span><br><span class="line">  <span class="attr">port</span>: <span class="number">8080</span>,  <span class="comment">// server端口号</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 该节点用于开发环节调试代码，报错行与源码行一致，发布时应该删除。</span></span><br><span class="line">  <span class="attr">devtool</span>:<span class="string">&#x27;inline-source-map&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="辅助插件-第三方包："><a href="#辅助插件-第三方包：" class="headerlink" title="辅助插件/第三方包："></a>辅助插件/第三方包：</h4><p>html-webpack-plugin：</p>
+<p>主html文件在JS打包后也应该作为静态资源存放于dist目录下，但为了确保dist目录下只存放打包生成的文件，会配置clean：true；会将主html文件删除。避免每次都创建html文件引入插件;</p>
+<p>或者说，每次运行打包都让html文件参与打包，（但原生webpack只能识别json 和js 文件）。</p>
+<p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install html-webpack-plugin -d</span><br></pre></td></tr></table></figure>
+
+<p>配置：webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、导入插件</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 2. 在plugins节点中配置插件</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 可以生成多个html页面，再new 实例就行。</span></span><br><span class="line">     <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">       <span class="attr">template</span>: <span class="string">&#x27;./public/index.html&#x27;</span>, <span class="comment">// 源文件路径 </span></span><br><span class="line">       <span class="attr">filename</span>: <span class="string">&#x27;index.html&#x27;</span>, <span class="comment">// 指定输出文件名和位置(默认位于出口文件夹下)</span></span><br><span class="line">       <span class="attr">inject</span>:<span class="string">&#x27;body&#x27;</span>, <span class="comment">// 打包后JS文件自动插入body，不需要手写引入代码</span></span><br><span class="line">       <span class="comment">// 关于插件的其他项配置，可以查看插件官方文档</span></span><br><span class="line">     &#125;),</span><br><span class="line">    其他插件</span><br><span class="line">   ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>webpack-dev-server</p>
+<p>实时加载源代码的变动，自动重新打包并启动浏览器，而不用每次都需要运行npm run </p>
+<p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack-dev-server</span><br></pre></td></tr></table></figure>
+
+<p>package.json</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;start&quot;</span>: <span class="string">&quot;webpack-dev-server --open&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>Webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">  <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>: <span class="string">&#x27;4411&#x27;</span>,</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>loader：</p>
+<p>项目中，从入口文件解析相关依赖分析模块，判断模块是否是JS文件，如果不是JS代码且配置了loader则交给相关loader解析编译（比如：less语法等转为css）。</p>
+<p>1、安装需要的loader</p>
+<p>参照webpack官网</p>
+<p>2、webpack.config.js中引入</p>
+<p>3、module.exports 中配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// ....</span></span><br><span class="line">  <span class="attr">module</span>:&#123;</span><br><span class="line">    <span class="comment">// module节点下是所有第三方模块的匹配规则，与插件不同。</span></span><br><span class="line">    <span class="attr">rules</span>:[</span><br><span class="line">      <span class="comment">// rules 节点下是文件后缀与第三方模块的匹配规则，多个模块匹配规则时从后往前匹配</span></span><br><span class="line">      <span class="comment">// 处理css的loader</span></span><br><span class="line">      &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,<span class="attr">use</span>:[<span class="string">&#x27;style-loader&#x27;</span>,<span class="string">&#x27;css-loader&#x27;</span>]&#125; ,<span class="comment">// test 文件匹配规则 ，use要调用的loader，loader顺序固定。</span></span><br><span class="line">      <span class="comment">// 处理less的loader</span></span><br><span class="line">      &#123;<span class="attr">test</span>:<span class="regexp">/\.lss$/</span>,<span class="attr">use</span>:[<span class="string">&#x27;style-loader&#x27;</span>,<span class="string">&#x27;css-loader&#x27;</span>,<span class="string">&#x27;less-loader&#x27;</span>]&#125;,</span><br><span class="line">      <span class="comment">// webpack 5 已经内置了图片加载机制不需要再使用第三方包</span></span><br><span class="line">      <span class="comment">// 处理图片地址的loader：大于限制时直接使用src,而不转为base64</span></span><br><span class="line">      <span class="comment">// 使用url-loader之前需要先在index.js中导入图片 import</span></span><br><span class="line">      <span class="comment">// limit 限制图片大小，outputPath指定图片打包生成路径。</span></span><br><span class="line">      <span class="comment">// &#123;test:/\.jpg|png|gif$/,use:[&#x27;url-loader?limit=22229&amp;outputPath:images&#x27;]&#125;</span></span><br><span class="line">      <span class="comment">// webpack 5处理图片的配置</span></span><br><span class="line">       &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(png|svg|jpg|gif)$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [<span class="string">&#x27;file-loader&#x27;</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>babel：</p>
+<p>如果模块是JS代码，判断是否包含了高级JS语法，包含JS高级语法且配置了Babel，则交给Babel调用相关loader编译转换，如果包含高级语法但没有配置Babel则报错；没有高级语法则直接交给webpack编译打包（高级语法或node环境下的语法浏览器无法识别）。</p>
+<p>1、安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @babel/core @babel/cli @babel/preset-env -D</span><br></pre></td></tr></table></figure>
+
+<p>2、配置 webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新版本可以没有</span></span><br><span class="line"><span class="attr">module</span>:&#123;</span><br><span class="line">  <span class="attr">rules</span>:[</span><br><span class="line">    &#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,<span class="attr">use</span>:<span class="string">&#x27;babel-loader&#x27;</span>,<span class="attr">exclude</span>:<span class="string">&#x27;/node-modules/&#x27;</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、配置 babel.config.js 依赖项</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// babel 预设</span></span><br><span class="line">  <span class="attr">presets</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&#x27;@babel/preset-env&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">targets</span>: &#123;</span><br><span class="line">          <span class="attr">edge</span>: <span class="string">&#x27;17&#x27;</span>,</span><br><span class="line">          <span class="attr">firefox</span>: <span class="string">&#x27;60&#x27;</span>,</span><br><span class="line">          <span class="attr">chrome</span>: <span class="string">&#x27;67&#x27;</span>,</span><br><span class="line">          <span class="attr">safari</span>: <span class="string">&#x27;11.1&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">useBuiltIns</span>: <span class="string">&#x27;usage&#x27;</span>,</span><br><span class="line">        <span class="attr">corejs</span>: <span class="string">&#x27;3.6.5&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 声明Babel可用的插件</span></span><br><span class="line">  <span class="attr">plugins</span>:[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="发布生产"><a href="#发布生产" class="headerlink" title="发布生产"></a>发布生产</h4><p>项目以发布模式运行以后，将文件夹给后端进行部署。</p>
+<p>1、发布模式运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式1:package.json  script节点下单独创建用于生产打包的命令</span></span><br><span class="line"><span class="string">&quot;build&quot;</span>:<span class="string">&quot;webpack --mode=production&quot;</span>,</span><br><span class="line"><span class="comment">// 方式2：webpack.config.js  mode节点设置为生产模式</span></span><br><span class="line"> <span class="attr">mode</span>:<span class="string">&#x27;production&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、@ 替代 src文件夹的路径：从里层../层级结构不清晰，使用 @ 代替src文件夹从外层往内查找</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、webpack.config.js 的 resolve节点下配置：</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">resolve</span>:&#123;</span><br><span class="line">    <span class="attr">alias</span>:&#123;</span><br><span class="line">      <span class="string">&quot;@&quot;</span>:path.<span class="title function_">join</span>(__dirname,<span class="string">&#x27;./src/&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2、VScode插件：path-Autocomplete,并配置</span></span><br><span class="line"><span class="string">&quot;path-autocomplete.extensionOnImport&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">&quot;path-autocomplete.pathMappings&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;@&quot;</span>: <span class="string">&quot;$&#123;folder&#125;/src&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><code>生产环境的包怎么处理？</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xiatian57.github.io/2022/10/15/framework/Ajax-Node/" data-id="cl9yysd8g00054zwn8u7a2ruq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/31/framework/vue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/09/tips/Mac/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mac 一些操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/31/framework/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/15/framework/Ajax-Node/">Ajax-Node-服务端相关</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/09/tips/Mac/">Mac 一些操作</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/05/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/27/javascript/ES6+/">ES6+</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Li Ping<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
