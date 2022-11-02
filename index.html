@@ -201,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/31/framework/vue/" data-id="cl9yysd8f00014zwn6rpc0p90" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/31/framework/vue/" data-id="cl9yzwqk50004alwngdb51t99" class="article-share-link">Share</a>
       
       
     </footer>
@@ -568,7 +568,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/15/framework/Ajax-Node/" data-id="cl9yysd8g00054zwn8u7a2ruq" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/15/framework/Ajax-Node/" data-id="cl9yzwqk40003alwnb1q88s22" class="article-share-link">Share</a>
       
       
     </footer>
@@ -607,7 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/09/tips/Mac/" data-id="cl9yysd8g00044zwnbdrpe3ly" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/09/tips/Mac/" data-id="cl9yzwqk50006alwng5xt68ce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -661,7 +661,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/10/05/hello-world/" data-id="cl9yysd8d00004zwng9a4aiws" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/10/05/hello-world/" data-id="cl9yzwqk00000alwncv12glyz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -903,7 +903,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/ES6+/" data-id="cl9yysd8f00024zwnbip1b11x" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/ES6+/" data-id="cl9yzwqk20001alwn8d5957ca" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1295,7 +1295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/WebAPI/" data-id="cl9yysd8h00064zwn5os66tdb" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/27/javascript/WebAPI/" data-id="cl9yzwqk50007alwn1vq0cwo2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1349,11 +1349,12 @@
 <p><code>扩展</code>：let 声明的全局作用域下的变量不挂载到window对象上，var声明的全局作用域下的变量挂载为window的属性。</p>
 <h4 id="自增自减："><a href="#自增自减：" class="headerlink" title="自增自减："></a>自增自减：</h4><p>++a：先给a自增存储，后参与运算。</p>
 <p>a++:先让a参与运算，后再自增并存储。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="comment">// console.log(a++) // 1</span></span><br><span class="line"><span class="comment">// console.log(++a) // 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b=a++ + ++a</span><br><span class="line"><span class="comment">// console.log(b) // 4</span></span><br><span class="line"><span class="comment">// console.log(a) // 3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="comment">// console.log(a++) // 1 (a=2)</span></span><br><span class="line"><span class="comment">// console.log(++a) // 2 (a=2)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b=a++ + ++a</span><br><span class="line"><span class="comment">// console.log(b) // 4</span></span><br><span class="line"><span class="comment">// console.log(a) // 3</span></span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="运算符："><a href="#运算符：" class="headerlink" title="运算符："></a>运算符：</h3><p>一元运算符：++；    减减；    ！(取反)  </p>
-<p>赋值运算符：=   ；+=   ；-=  ；*=    ；/=   ；%=</p>
+<h3 id="运算符："><a href="#运算符：" class="headerlink" title="运算符："></a>运算符：</h3><p>一元运算符：加加：++    减减:–   取反：！  </p>
+<p>赋值运算符：  =  +=  -=  *=   /=   %=</p>
+<p>赋值运算符从右向左执行。</p>
 <p>比较运算符：</p>
 <p>== ：只判断数值是否相等。</p>
 <p>双等的隐式转换：</p>
@@ -1364,18 +1365,19 @@
 <p>+不仅表示加法运算，还表示字符串拼接，带有隐式转换。当字符串+数字时，将数字转换为字符串拼接，当只有+字符串时，隐式转换为数字，使用Number方法转换。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;11&#x27;</span>+<span class="number">22</span>) <span class="comment">// 1122</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(+<span class="string">&#x27;11&#x27;</span>+<span class="number">22</span>) <span class="comment">// 33</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h4><p>&amp;&amp;    ||     !    </p>
+<h4 id="逻辑运算符："><a href="#逻辑运算符：" class="headerlink" title="逻辑运算符："></a>逻辑运算符：</h4><p>与：&amp;&amp;    或：||     非：!    </p>
 <p>逻辑取值：</p>
-<p>true:[],{} 即使为空也是true。</p>
-<p>false: null,  undefined, 空字符串（有空格为true），数值0，+0，-0（字符串’0’为true），NaN,</p>
+<p>true:[],{} 即使内容为空，栈中也存放了地址，也是true。</p>
+<p>false: null, undefined, 空字符串（有空格为true），数值0，+0，-0（字符串’0’为true），NaN,</p>
 <p>逻辑中断：逻辑比较返回的是式子的值，而不是Boolean。隐式转换只是用于比较判断返回哪个式子。</p>
 <p>左边式子能决定结果直接返回左边式子，左边不能决定结果直接返回右边式子。</p>
 <p>与中断： （左）&amp;&amp;（右） ：左为true返回右边，左为false返回左边；</p>
 <p>或中断：（左）||（右）：左为true返回左边，左边false返回右边；</p>
 <h4 id="赋值运算符："><a href="#赋值运算符：" class="headerlink" title="赋值运算符："></a>赋值运算符：</h4><blockquote>
-<p>以 <code>=</code> 作为赋值运算符，赋值运算符执行顺序–&gt;从右向左执行，先运算后赋值；如果是函数也是先创建函数再赋值，如果赋值失败则函数挂载全局，且函数依旧载入任务队列中。</p>
+<p>以 <code>=</code> 作为赋值运算符，赋值运算符执行顺序–&gt;从右向左执行，先运算后赋值；</p>
 </blockquote>
-<p>相关了解：（event loop）JS主线程在运行环境中开辟独立封闭环境（执行栈）执行同步代码；在父环境下再开辟独立环境用以存放或执行异步，将执行结果放入任务队列等待同步代码执行完毕，再依据触发异步的时机推入执行栈。同时，即使同步代码报错主线程被迫暂停（暂停等待继续执行，而不是终止线程并清空回收），但已经加载到任务队列的异步代码不受影响依旧执行并能被触发推入执行栈。某些异步代码没有回调则直接推入执行栈执行，否则将回调推入执行栈。</p>
+<p>代码执行：代码区域先编译，函数、异步等操作放入各自的存放区域，如果赋值失败，已经放入异步中的代码被触发依旧执行。</p>
+<p>相关了解：（event loop）JS主线程在运行环境中开辟独立封闭环境（执行栈）执行同步代码；在父环境下再开辟独立环境用以存放或执行异步，将执行的回调函数放入任务队列等待同步代码执行完毕，查找推入执行栈。同时，即使同步代码报错主线程被迫暂停，但已经加载到任务队列的异步代码不受影响依旧执行并能被触发推入执行栈（比如定时器）。</p>
 <h4 id="类型转换："><a href="#类型转换：" class="headerlink" title="类型转换："></a>类型转换：</h4><p>1、转为number型：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 字符串转数字类型: parseInt(), parseFloat()</span></span><br><span class="line"><span class="comment">// 2. 非字符串转数字类型: Number()</span></span><br><span class="line"><span class="comment">// 1. 字符串转数字类型:</span></span><br><span class="line"><span class="comment">// parseInt() :  转整数;从左往右转换，遇到小数点和非数字结束。</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&#x27;9.9a&#x27;</span>)) <span class="comment">// 9</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&#x27;9.9a&#x27;</span>)) <span class="comment">// 9</span></span><br><span class="line"><span class="comment">// 如果第一位为非数字则为NaN</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&#x27;a9&#x27;</span>)) <span class="comment">//NaN</span></span><br><span class="line"><span class="comment">// parseInt(待转换数据，数据底数)：因为对于非数字字符串该函数直接返回NaN，但十六进制或八进制以字母开头，为了防止转换失败，可以传入底数帮助函数识别数据。</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&#x27;AF&#x27;</span>,<span class="number">16</span>)) <span class="comment">// 转换为十进制  175</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseInt</span>(<span class="string">&#x27;AF&#x27;</span>)  <span class="comment">// NaN</span></span><br><span class="line">            </span><br><span class="line"><span class="comment">//parseFloat() :  转浮点数, 只能识别一次小数点（当数据出现多次小数点时，数据转换在第二个小数点处结束。遇到非数字结束。</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseFloat</span>(<span class="string">&#x27;9.9a&#x27;</span>)) <span class="comment">// 9.9</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseFloat</span>(<span class="string">&#x27;9.999a&#x27;</span>)) <span class="comment">// 9.999</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">parseFloat</span>(<span class="string">&#x27;9.999.8&#x27;</span>)) <span class="comment">// 9.999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 非字符串转数字类型: Number()</span></span><br><span class="line"><span class="comment">//  可以解析整数和小数</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="string">&#x27;5.5&#x27;</span>)) <span class="comment">// 5.5</span></span><br><span class="line"><span class="comment">//  只要有非数字字符就是NaN</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="string">&#x27;9.9a&#x27;</span>)) <span class="comment">// NaN</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">undefined</span>)) <span class="comment">// NaN</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">null</span>)) <span class="comment">//0</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">true</span>)) <span class="comment">// 1</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>(<span class="literal">false</span>)) <span class="comment">//0</span></span><br></pre></td></tr></table></figure>
 
@@ -1566,7 +1568,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl9yysd8g00034zwngirsebl6" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/javascript/JavaScript-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="cl9yzwqk40002alwn66oh2x6k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1715,7 +1717,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9yysd8h00074zwncyj9639p" class="article-share-link">Share</a>
+      <a data-url="https://xiatian57.github.io/2022/09/16/tips/Tips/" data-id="cl9yzwqk50005alwnc5uy14rh" class="article-share-link">Share</a>
       
       
     </footer>
